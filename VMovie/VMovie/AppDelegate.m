@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "HomeViewController.h"
+#import "EaseStartView.h"
+#import "NewFeatureViewController.h"
+#import "VMNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -19,18 +22,40 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [NSThread sleepForTimeInterval:2.0];
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     self.window.backgroundColor = [UIColor whiteColor];
     
-    self.window.rootViewController = [[HomeViewController alloc] init];
+    NSString *sandboxVersion = [UserDefaults stringForKey:@"AppVersion"];
+    NSString *currentVersion = APP_VERSION;
+    
+    if ([currentVersion isEqualToString:sandboxVersion]) {
+        VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+        self.window.rootViewController = vmNav;
+    } else {
+        self.window.rootViewController = [[NewFeatureViewController alloc] init];
+        [UserDefaults setObject:currentVersion forKey:@"AppVersion"];
+        [UserDefaults synchronize];
+    }
+    
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:SwitchRootViewControllerNotification object:nil] subscribeNext:^(id x) {
+        VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+        self.window.rootViewController = vmNav;
+    }];
     
     [self.window makeKeyAndVisible];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    //启动动画
+    EaseStartView *startView = [EaseStartView startView];
+    [startView startAnimation];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -52,6 +77,10 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

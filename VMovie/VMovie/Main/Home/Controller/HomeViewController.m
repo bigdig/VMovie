@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "UIBarButtonItem+Custom.h"
 
 @interface HomeViewController ()
 
@@ -17,23 +18,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = RANDOM_UICOLOR;
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = @"最新";
+    
+    
+    UIBarButtonItem *detailItem = [UIBarButtonItem itemWithImage:@"img_icon_menu" HighImage:@"img_icon_menu" target:self action:@selector(detailItemClick)];
+    self.navigationItem.leftBarButtonItem = detailItem;
+    
+    UIBarButtonItem *searchItem = [UIBarButtonItem itemWithImage:@"img_icon_search" HighImage:@"img_icon_search" target:self action:@selector(searchItemClick)];
+    self.navigationItem.rightBarButtonItem = searchItem;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) detailItemClick {
+    NSLog(@"%s",__func__);
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) searchItemClick {
+    NSLog(@"%s",__func__);
 }
-*/
+
+
+
+
 
 @end

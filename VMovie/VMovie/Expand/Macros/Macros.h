@@ -9,7 +9,7 @@
 
 // App Frame
 #define Application_Frame       [[UIScreen mainScreen] applicationFrame]
-
+#define Application_KeyWindow [UIApplication sharedApplication].keyWindow
 // App Frame Height&Width
 #define App_Frame_Height        [[UIScreen mainScreen] applicationFrame].size.height
 #define App_Frame_Width         [[UIScreen mainScreen] applicationFrame].size.width
@@ -17,7 +17,7 @@
 // MainScreen Height&Width
 #define Main_Screen_Height      [[UIScreen mainScreen] bounds].size.height
 #define Main_Screen_Width       [[UIScreen mainScreen] bounds].size.width
-
+#define Main_Screen_Bounds    [[UIScreen mainScreen] bounds]
 
 // View 坐标(x,y)和宽高(width,height)
 #define X(v)                    (v).frame.origin.x
@@ -83,7 +83,7 @@
 // app 信息
 #define APP_STORE_URL       @"itms-apps://itunes.apple.com/us/app/xiong-zhao/id1020593660?l=zh&ls=1&mt=8"
 #define APP_STORE_INFO_URL  @"https://itunes.apple.com/cn/lookup?id=1020593660"
-#define VERSION             [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]
+#define APP_VERSION             [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]
 
 
 // block self
@@ -97,3 +97,15 @@
 #else
 #define NSLog(FORMAT, ...) nil
 #endif
+
+//设备型号
+#define Device_Is_iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define Device_Is_iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+#define Device_Is_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+#define Device_Is_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+//尺寸适配
+#define ScaleFrom_iPhone5_Desgin(_X_) (_X_ * (App_Frame_Width/320))
+
+// 数据存储
+#define UserDefaults [NSUserDefaults standardUserDefaults]
