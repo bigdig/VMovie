@@ -7,6 +7,7 @@
 //
 
 #import "VMNavigationController.h"
+#import "VMNavigationBar.h"
 
 @interface VMNavigationController ()
 
@@ -24,7 +25,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.interactivePopGestureRecognizer.delegate = nil;
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"img_place_bg"] forBarMetrics:UIBarMetricsDefault];
+    
+    [self setValue:[[VMNavigationBar alloc] init] forKeyPath:@"navigationBar"];
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

@@ -26,6 +26,9 @@
 		7137ABA81C95B7D500030DBD /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABA71C95B7D500030DBD /* Const.m */; };
 		7137ABAE1C95C0D800030DBD /* UIBarButtonItem+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABAD1C95C0D800030DBD /* UIBarButtonItem+Custom.m */; };
 		7137ABB51C95C50900030DBD /* VMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABB21C95C50900030DBD /* VMNavigationController.m */; };
+		7137ABBB1C96312700030DBD /* HotTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABBA1C96312700030DBD /* HotTableViewController.m */; };
+		7137ABBE1C96313B00030DBD /* LatestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABBD1C96313B00030DBD /* LatestTableViewController.m */; };
+		7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABC01C963F4D00030DBD /* VMNavigationBar.m */; };
 		71FB50681C94579B00771990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB50671C94579B00771990 /* main.m */; };
 		71FB506B1C94579B00771990 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB506A1C94579B00771990 /* AppDelegate.m */; };
 		71FB50731C94579B00771990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB50721C94579B00771990 /* Assets.xcassets */; };
@@ -81,6 +84,12 @@
 		7137ABAD1C95C0D800030DBD /* UIBarButtonItem+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Custom.m"; sourceTree = "<group>"; };
 		7137ABB11C95C50900030DBD /* VMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMNavigationController.h; sourceTree = "<group>"; };
 		7137ABB21C95C50900030DBD /* VMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMNavigationController.m; sourceTree = "<group>"; };
+		7137ABB91C96312700030DBD /* HotTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTableViewController.h; sourceTree = "<group>"; };
+		7137ABBA1C96312700030DBD /* HotTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTableViewController.m; sourceTree = "<group>"; };
+		7137ABBC1C96313B00030DBD /* LatestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LatestTableViewController.h; sourceTree = "<group>"; };
+		7137ABBD1C96313B00030DBD /* LatestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LatestTableViewController.m; sourceTree = "<group>"; };
+		7137ABBF1C963F4D00030DBD /* VMNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMNavigationBar.h; sourceTree = "<group>"; };
+		7137ABC01C963F4D00030DBD /* VMNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMNavigationBar.m; sourceTree = "<group>"; };
 		71FB50631C94579B00771990 /* VMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB50671C94579B00771990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		71FB50691C94579B00771990 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -201,6 +210,8 @@
 		7137ABB41C95C50900030DBD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7137ABBF1C963F4D00030DBD /* VMNavigationBar.h */,
+				7137ABC01C963F4D00030DBD /* VMNavigationBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -392,6 +403,10 @@
 			children = (
 				71FB50C51C945C2D00771990 /* HomeViewController.h */,
 				71FB50C61C945C2D00771990 /* HomeViewController.m */,
+				7137ABB91C96312700030DBD /* HotTableViewController.h */,
+				7137ABBA1C96312700030DBD /* HotTableViewController.m */,
+				7137ABBC1C96313B00030DBD /* LatestTableViewController.h */,
+				7137ABBD1C96313B00030DBD /* LatestTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -609,11 +624,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */,
 				71FB506B1C94579B00771990 /* AppDelegate.m in Sources */,
 				7137ABA81C95B7D500030DBD /* Const.m in Sources */,
+				7137ABBE1C96313B00030DBD /* LatestTableViewController.m in Sources */,
 				7137AB811C95991D00030DBD /* EaseStartView.m in Sources */,
 				7137ABAE1C95C0D800030DBD /* UIBarButtonItem+Custom.m in Sources */,
 				71FB50681C94579B00771990 /* main.m in Sources */,
+				7137ABBB1C96312700030DBD /* HotTableViewController.m in Sources */,
 				7137AB8A1C95AB2500030DBD /* NewFeatureCell.m in Sources */,
 				7137AB841C95A2A200030DBD /* UIView+Frame.m in Sources */,
 				7137AB871C95A8BC00030DBD /* NewFeatureViewController.m in Sources */,
