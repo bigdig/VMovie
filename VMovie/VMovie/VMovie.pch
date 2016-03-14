@@ -19,5 +19,6 @@
 #import <Masonry/Masonry.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/EXTScope.h>
+#import <SVprogressHUD/SVProgressHUD.h>
 
 #endif /* VMovie_pch */

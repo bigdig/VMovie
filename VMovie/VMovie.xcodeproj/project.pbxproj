@@ -29,6 +29,9 @@
 		7137ABBB1C96312700030DBD /* HotTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABBA1C96312700030DBD /* HotTableViewController.m */; };
 		7137ABBE1C96313B00030DBD /* LatestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABBD1C96313B00030DBD /* LatestTableViewController.m */; };
 		7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABC01C963F4D00030DBD /* VMNavigationBar.m */; };
+		7137ABC41C96EA0200030DBD /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABC31C96EA0200030DBD /* Movie.m */; };
+		7137ABC71C96ED5700030DBD /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABC61C96ED5700030DBD /* MovieCell.m */; };
+		7137ABCD1C96FE5100030DBD /* RatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABCC1C96FE5100030DBD /* RatingView.m */; };
 		71FB50681C94579B00771990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB50671C94579B00771990 /* main.m */; };
 		71FB506B1C94579B00771990 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB506A1C94579B00771990 /* AppDelegate.m */; };
 		71FB50731C94579B00771990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB50721C94579B00771990 /* Assets.xcassets */; };
@@ -90,6 +93,12 @@
 		7137ABBD1C96313B00030DBD /* LatestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LatestTableViewController.m; sourceTree = "<group>"; };
 		7137ABBF1C963F4D00030DBD /* VMNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMNavigationBar.h; sourceTree = "<group>"; };
 		7137ABC01C963F4D00030DBD /* VMNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMNavigationBar.m; sourceTree = "<group>"; };
+		7137ABC21C96EA0200030DBD /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		7137ABC31C96EA0200030DBD /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		7137ABC51C96ED5700030DBD /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
+		7137ABC61C96ED5700030DBD /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		7137ABCB1C96FE5100030DBD /* RatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingView.h; sourceTree = "<group>"; };
+		7137ABCC1C96FE5100030DBD /* RatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingView.m; sourceTree = "<group>"; };
 		71FB50631C94579B00771990 /* VMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB50671C94579B00771990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		71FB50691C94579B00771990 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -414,6 +423,8 @@
 		71FB50C31C945C1B00771990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7137ABC21C96EA0200030DBD /* Movie.h */,
+				7137ABC31C96EA0200030DBD /* Movie.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -421,6 +432,10 @@
 		71FB50C41C945C1B00771990 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7137ABC51C96ED5700030DBD /* MovieCell.h */,
+				7137ABC61C96ED5700030DBD /* MovieCell.m */,
+				7137ABCB1C96FE5100030DBD /* RatingView.h */,
+				7137ABCC1C96FE5100030DBD /* RatingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -626,14 +641,17 @@
 			files = (
 				7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */,
 				71FB506B1C94579B00771990 /* AppDelegate.m in Sources */,
+				7137ABC41C96EA0200030DBD /* Movie.m in Sources */,
 				7137ABA81C95B7D500030DBD /* Const.m in Sources */,
 				7137ABBE1C96313B00030DBD /* LatestTableViewController.m in Sources */,
 				7137AB811C95991D00030DBD /* EaseStartView.m in Sources */,
 				7137ABAE1C95C0D800030DBD /* UIBarButtonItem+Custom.m in Sources */,
+				7137ABCD1C96FE5100030DBD /* RatingView.m in Sources */,
 				71FB50681C94579B00771990 /* main.m in Sources */,
 				7137ABBB1C96312700030DBD /* HotTableViewController.m in Sources */,
 				7137AB8A1C95AB2500030DBD /* NewFeatureCell.m in Sources */,
 				7137AB841C95A2A200030DBD /* UIView+Frame.m in Sources */,
+				7137ABC71C96ED5700030DBD /* MovieCell.m in Sources */,
 				7137AB871C95A8BC00030DBD /* NewFeatureViewController.m in Sources */,
 				71FB50C71C945C2D00771990 /* HomeViewController.m in Sources */,
 				7137ABB51C95C50900030DBD /* VMNavigationController.m in Sources */,

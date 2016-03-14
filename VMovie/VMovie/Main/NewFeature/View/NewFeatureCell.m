@@ -46,15 +46,17 @@
              [[NSNotificationCenter defaultCenter] postNotificationName:SwitchRootViewControllerNotification object:nil];
         }];
         
-        button.backgroundColor = [UIColor blackColor];
-        button.titleLabel.font = [UIFont boldSystemFontOfSize:20];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setTitle:@"轻装再出发" forState:UIControlStateNormal];
+//        button.backgroundColor = [UIColor blackColor];
+//        button.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+//        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [button setTitle:@"轻装再出发" forState:UIControlStateNormal];
+//        
+//        button.layer.masksToBounds = YES;
+//        button.layer.cornerRadius = buttonHeight/2;
+//        button.layer.borderWidth = 1.0;
+//        button.layer.borderColor = [UIColor whiteColor].CGColor;
         
-        button.layer.masksToBounds = YES;
-        button.layer.cornerRadius = buttonHeight/2;
-        button.layer.borderWidth = 1.0;
-        button.layer.borderColor = [UIColor whiteColor].CGColor;
+        [button setBackgroundImage:[UIImage imageNamed:@"yd_button"] forState:UIControlStateNormal];
         
         [self addSubview:button];
         self.startButton = button;

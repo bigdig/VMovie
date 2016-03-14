@@ -48,10 +48,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     //启动动画
-    EaseStartView *startView = [EaseStartView startView];
-    [startView startAnimation];
-    
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    EaseStartView *startView = [EaseStartView startView];
+//    [startView startAnimation];
     
     return YES;
 }

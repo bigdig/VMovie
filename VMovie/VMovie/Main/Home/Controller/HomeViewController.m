@@ -16,7 +16,7 @@
 /** 导航栏标签视图 */
 @property (nonatomic, weak) UIView *titleView;
 /** 标签指示器 */
-@property (nonatomic, weak) UIView *indicatiorView;
+@property (nonatomic, weak) UIView *indicatorView;
 /** 选中的标签按钮 */
 @property (nonatomic, strong) UIButton *selectedButton;
 /** 容器视图 */
@@ -102,14 +102,14 @@
         button.tag = i;
         [button setTitle:titles[i] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-        [button setTitleColor:[UIColor colorWithWhite:0.6 alpha:1.0] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithWhite:0.7 alpha:1.0] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
         [button  addTarget:self action:@selector(titleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         if (i == 0) {
             self.selectedButton = button;
             button.enabled = NO;
-            button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
+            self.selectedButton.transform = CGAffineTransformMakeScale(1.2, 1.2);
         }
     }
     
@@ -122,7 +122,7 @@
     indicatorView.height = 2;
     indicatorView.y = titleView.height - indicatorView.height;
     indicatorView.backgroundColor = [UIColor whiteColor];
-    self.indicatiorView = indicatorView;
+    self.indicatorView = indicatorView;
     [titleView addSubview:indicatorView];
 }
 
@@ -130,16 +130,17 @@
     
     //使用enable 防止重复点击与加载
     self.selectedButton.enabled = YES;
-    self.selectedButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    if (self.selectedButton != button) {
+        self.selectedButton.transform = CGAffineTransformIdentity;
+    }
     button.enabled = NO;
-    button.titleLabel.font = [UIFont systemFontOfSize:20.0f];
-    [button.titleLabel sizeToFit];
     self.selectedButton = button;
     
     //动画
     [UIView animateWithDuration:0.25 animations:^{
-        self.indicatiorView.width = 1.5 * button.titleLabel.width;
-        self.indicatiorView.centerX = button.centerX;
+        self.indicatorView.width = 1.5 * button.titleLabel.width;
+        self.indicatorView.centerX = button.centerX;
+        self.selectedButton.transform = CGAffineTransformMakeScale(1.2, 1.2);
     }];
     
     CGFloat offsetX = button.tag * App_Frame_Width;
@@ -163,7 +164,7 @@
     UIViewController *viewController = self.childViewControllers[index];
     viewController.view.x = index * scrollView.width;
     viewController.view.y = 0;
-    viewController.view.height = scrollView.height;
+    viewController.view.height = scrollView.height - 64;
     
     [self.contentView addSubview:viewController.view];
 }
