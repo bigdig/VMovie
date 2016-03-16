@@ -26,12 +26,19 @@
 		7137ABA81C95B7D500030DBD /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABA71C95B7D500030DBD /* Const.m */; };
 		7137ABAE1C95C0D800030DBD /* UIBarButtonItem+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABAD1C95C0D800030DBD /* UIBarButtonItem+Custom.m */; };
 		7137ABB51C95C50900030DBD /* VMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABB21C95C50900030DBD /* VMNavigationController.m */; };
-		7137ABBB1C96312700030DBD /* HotTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABBA1C96312700030DBD /* HotTableViewController.m */; };
-		7137ABBE1C96313B00030DBD /* LatestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABBD1C96313B00030DBD /* LatestTableViewController.m */; };
 		7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABC01C963F4D00030DBD /* VMNavigationBar.m */; };
 		7137ABC41C96EA0200030DBD /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABC31C96EA0200030DBD /* Movie.m */; };
 		7137ABC71C96ED5700030DBD /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABC61C96ED5700030DBD /* MovieCell.m */; };
-		7137ABCD1C96FE5100030DBD /* RatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABCC1C96FE5100030DBD /* RatingView.m */; };
+		7137ABD81C97933600030DBD /* Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABD71C97933600030DBD /* Banner.m */; };
+		7137ABE41C97AAD300030DBD /* MovieListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABE31C97AAD300030DBD /* MovieListTableViewController.m */; };
+		7137ABE71C97ADB300030DBD /* MoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABE61C97ADB300030DBD /* MoviePlayerViewController.m */; };
+		7137ABEF1C97B51500030DBD /* ZFPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABEA1C97B51500030DBD /* ZFPlayerMaskView.m */; };
+		7137ABF01C97B51500030DBD /* ZFPlayerMaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7137ABEB1C97B51500030DBD /* ZFPlayerMaskView.xib */; };
+		7137ABF11C97B51500030DBD /* ZFPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABED1C97B51500030DBD /* ZFPlayerView.m */; };
+		7137ABF21C97B51500030DBD /* ZFPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7137ABEE1C97B51500030DBD /* ZFPlayerView.xib */; };
+		7137ABFC1C97E61F00030DBD /* SearchMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABFB1C97E61F00030DBD /* SearchMovieViewController.m */; };
+		7137ABFF1C97EA1100030DBD /* SearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137ABFE1C97EA1100030DBD /* SearchBar.m */; };
+		7137AC411C98330500030DBD /* SearchMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7137AC401C98330500030DBD /* SearchMovieCell.m */; };
 		71FB50681C94579B00771990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB50671C94579B00771990 /* main.m */; };
 		71FB506B1C94579B00771990 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB506A1C94579B00771990 /* AppDelegate.m */; };
 		71FB50731C94579B00771990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB50721C94579B00771990 /* Assets.xcassets */; };
@@ -87,18 +94,30 @@
 		7137ABAD1C95C0D800030DBD /* UIBarButtonItem+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Custom.m"; sourceTree = "<group>"; };
 		7137ABB11C95C50900030DBD /* VMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMNavigationController.h; sourceTree = "<group>"; };
 		7137ABB21C95C50900030DBD /* VMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMNavigationController.m; sourceTree = "<group>"; };
-		7137ABB91C96312700030DBD /* HotTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTableViewController.h; sourceTree = "<group>"; };
-		7137ABBA1C96312700030DBD /* HotTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTableViewController.m; sourceTree = "<group>"; };
-		7137ABBC1C96313B00030DBD /* LatestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LatestTableViewController.h; sourceTree = "<group>"; };
-		7137ABBD1C96313B00030DBD /* LatestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LatestTableViewController.m; sourceTree = "<group>"; };
 		7137ABBF1C963F4D00030DBD /* VMNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMNavigationBar.h; sourceTree = "<group>"; };
 		7137ABC01C963F4D00030DBD /* VMNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMNavigationBar.m; sourceTree = "<group>"; };
 		7137ABC21C96EA0200030DBD /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		7137ABC31C96EA0200030DBD /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		7137ABC51C96ED5700030DBD /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
 		7137ABC61C96ED5700030DBD /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
-		7137ABCB1C96FE5100030DBD /* RatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingView.h; sourceTree = "<group>"; };
-		7137ABCC1C96FE5100030DBD /* RatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingView.m; sourceTree = "<group>"; };
+		7137ABD61C97933600030DBD /* Banner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Banner.h; sourceTree = "<group>"; };
+		7137ABD71C97933600030DBD /* Banner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Banner.m; sourceTree = "<group>"; };
+		7137ABE21C97AAD300030DBD /* MovieListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieListTableViewController.h; sourceTree = "<group>"; };
+		7137ABE31C97AAD300030DBD /* MovieListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieListTableViewController.m; sourceTree = "<group>"; };
+		7137ABE51C97ADB300030DBD /* MoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePlayerViewController.h; sourceTree = "<group>"; };
+		7137ABE61C97ADB300030DBD /* MoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayerViewController.m; sourceTree = "<group>"; };
+		7137ABE91C97B51500030DBD /* ZFPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerMaskView.h; sourceTree = "<group>"; };
+		7137ABEA1C97B51500030DBD /* ZFPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerMaskView.m; sourceTree = "<group>"; };
+		7137ABEB1C97B51500030DBD /* ZFPlayerMaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZFPlayerMaskView.xib; sourceTree = "<group>"; };
+		7137ABEC1C97B51500030DBD /* ZFPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPlayerView.h; sourceTree = "<group>"; };
+		7137ABED1C97B51500030DBD /* ZFPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPlayerView.m; sourceTree = "<group>"; };
+		7137ABEE1C97B51500030DBD /* ZFPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZFPlayerView.xib; sourceTree = "<group>"; };
+		7137ABFA1C97E61F00030DBD /* SearchMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMovieViewController.h; sourceTree = "<group>"; };
+		7137ABFB1C97E61F00030DBD /* SearchMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMovieViewController.m; sourceTree = "<group>"; };
+		7137ABFD1C97EA1100030DBD /* SearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBar.h; sourceTree = "<group>"; };
+		7137ABFE1C97EA1100030DBD /* SearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBar.m; sourceTree = "<group>"; };
+		7137AC3F1C98330500030DBD /* SearchMovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMovieCell.h; sourceTree = "<group>"; };
+		7137AC401C98330500030DBD /* SearchMovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMovieCell.m; sourceTree = "<group>"; };
 		71FB50631C94579B00771990 /* VMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB50671C94579B00771990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		71FB50691C94579B00771990 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -225,6 +244,56 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7137ABE81C97B51500030DBD /* PlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				7137ABE91C97B51500030DBD /* ZFPlayerMaskView.h */,
+				7137ABEA1C97B51500030DBD /* ZFPlayerMaskView.m */,
+				7137ABEB1C97B51500030DBD /* ZFPlayerMaskView.xib */,
+				7137ABEC1C97B51500030DBD /* ZFPlayerView.h */,
+				7137ABED1C97B51500030DBD /* ZFPlayerView.m */,
+				7137ABEE1C97B51500030DBD /* ZFPlayerView.xib */,
+			);
+			path = PlayerView;
+			sourceTree = "<group>";
+		};
+		7137ABF31C97E3EC00030DBD /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7137ABF41C97E3EC00030DBD /* Controller */,
+				7137ABF51C97E3EC00030DBD /* Model */,
+				7137ABF61C97E3EC00030DBD /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		7137ABF41C97E3EC00030DBD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7137ABFA1C97E61F00030DBD /* SearchMovieViewController.h */,
+				7137ABFB1C97E61F00030DBD /* SearchMovieViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7137ABF51C97E3EC00030DBD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7137ABF61C97E3EC00030DBD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7137ABFD1C97EA1100030DBD /* SearchBar.h */,
+				7137ABFE1C97EA1100030DBD /* SearchBar.m */,
+				7137AC3F1C98330500030DBD /* SearchMovieCell.h */,
+				7137AC401C98330500030DBD /* SearchMovieCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		71FB505A1C94579B00771990 = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +362,7 @@
 		71FB50B61C945B0E00771990 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				7137ABE81C97B51500030DBD /* PlayerView */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -300,6 +370,7 @@
 		71FB50B71C945B1400771990 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7137ABF31C97E3EC00030DBD /* Search */,
 				7137ABAF1C95C50900030DBD /* Other */,
 				7137AB7B1C9598F600030DBD /* NewFeature */,
 				71FB50C11C945C1B00771990 /* Home */,
@@ -412,10 +483,10 @@
 			children = (
 				71FB50C51C945C2D00771990 /* HomeViewController.h */,
 				71FB50C61C945C2D00771990 /* HomeViewController.m */,
-				7137ABB91C96312700030DBD /* HotTableViewController.h */,
-				7137ABBA1C96312700030DBD /* HotTableViewController.m */,
-				7137ABBC1C96313B00030DBD /* LatestTableViewController.h */,
-				7137ABBD1C96313B00030DBD /* LatestTableViewController.m */,
+				7137ABE21C97AAD300030DBD /* MovieListTableViewController.h */,
+				7137ABE31C97AAD300030DBD /* MovieListTableViewController.m */,
+				7137ABE51C97ADB300030DBD /* MoviePlayerViewController.h */,
+				7137ABE61C97ADB300030DBD /* MoviePlayerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -425,6 +496,8 @@
 			children = (
 				7137ABC21C96EA0200030DBD /* Movie.h */,
 				7137ABC31C96EA0200030DBD /* Movie.m */,
+				7137ABD61C97933600030DBD /* Banner.h */,
+				7137ABD71C97933600030DBD /* Banner.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -434,8 +507,6 @@
 			children = (
 				7137ABC51C96ED5700030DBD /* MovieCell.h */,
 				7137ABC61C96ED5700030DBD /* MovieCell.m */,
-				7137ABCB1C96FE5100030DBD /* RatingView.h */,
-				7137ABCC1C96FE5100030DBD /* RatingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -556,6 +627,7 @@
 			files = (
 				7137AB9E1C95B05000030DBD /* 6_2.jpg in Resources */,
 				7137AB9B1C95B05000030DBD /* 5_2.jpg in Resources */,
+				7137ABF21C97B51500030DBD /* ZFPlayerView.xib in Resources */,
 				7137ABA11C95B05000030DBD /* 6p_2.jpg in Resources */,
 				7137AB9A1C95B05000030DBD /* 5_1.jpg in Resources */,
 				7137AB991C95B05000030DBD /* 4_3.jpg in Resources */,
@@ -563,6 +635,7 @@
 				7137ABA21C95B05000030DBD /* 6p_3.jpg in Resources */,
 				7137AB981C95B05000030DBD /* 4_2.jpg in Resources */,
 				7137AB9D1C95B05000030DBD /* 6_1.jpg in Resources */,
+				7137ABF01C97B51500030DBD /* ZFPlayerMaskView.xib in Resources */,
 				7137AB971C95B05000030DBD /* 4_1.jpg in Resources */,
 				7137ABA01C95B05000030DBD /* 6p_1.jpg in Resources */,
 				7137AB9C1C95B05000030DBD /* 5_3.jpg in Resources */,
@@ -639,21 +712,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7137ABE41C97AAD300030DBD /* MovieListTableViewController.m in Sources */,
 				7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */,
+				7137ABE71C97ADB300030DBD /* MoviePlayerViewController.m in Sources */,
+				7137ABEF1C97B51500030DBD /* ZFPlayerMaskView.m in Sources */,
 				71FB506B1C94579B00771990 /* AppDelegate.m in Sources */,
+				7137ABF11C97B51500030DBD /* ZFPlayerView.m in Sources */,
 				7137ABC41C96EA0200030DBD /* Movie.m in Sources */,
 				7137ABA81C95B7D500030DBD /* Const.m in Sources */,
-				7137ABBE1C96313B00030DBD /* LatestTableViewController.m in Sources */,
 				7137AB811C95991D00030DBD /* EaseStartView.m in Sources */,
+				7137ABFF1C97EA1100030DBD /* SearchBar.m in Sources */,
 				7137ABAE1C95C0D800030DBD /* UIBarButtonItem+Custom.m in Sources */,
-				7137ABCD1C96FE5100030DBD /* RatingView.m in Sources */,
 				71FB50681C94579B00771990 /* main.m in Sources */,
-				7137ABBB1C96312700030DBD /* HotTableViewController.m in Sources */,
+				7137ABFC1C97E61F00030DBD /* SearchMovieViewController.m in Sources */,
 				7137AB8A1C95AB2500030DBD /* NewFeatureCell.m in Sources */,
+				7137AC411C98330500030DBD /* SearchMovieCell.m in Sources */,
 				7137AB841C95A2A200030DBD /* UIView+Frame.m in Sources */,
 				7137ABC71C96ED5700030DBD /* MovieCell.m in Sources */,
 				7137AB871C95A8BC00030DBD /* NewFeatureViewController.m in Sources */,
 				71FB50C71C945C2D00771990 /* HomeViewController.m in Sources */,
+				7137ABD81C97933600030DBD /* Banner.m in Sources */,
 				7137ABB51C95C50900030DBD /* VMNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

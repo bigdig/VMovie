@@ -24,8 +24,10 @@
 @property (nonatomic, weak) UIImageView *shadowView;
 /** 分享 */
 @property (nonatomic, weak) UIButton *shareButton;
-/** 评分 */
+/** 评分视图 */
 @property (nonatomic, weak) HCSStarRatingView *ratingView;
+/** 评分标签 */
+@property (nonatomic, weak) UILabel *ratingLabel;
 
 @end
 
@@ -35,7 +37,8 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor blackColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView *bgView = [[UIImageView alloc] init];
         bgView.contentMode = UIViewContentModeScaleAspectFill;
@@ -64,48 +67,59 @@
         ratingView.emptyStarImage = [UIImage imageNamed:@"star_hui"];
         ratingView.filledStarImage = [UIImage imageNamed:@"foregroundStar"];
         ratingView.backgroundColor = [UIColor clearColor];
+        ratingView.userInteractionEnabled = NO;
         [self.contentView addSubview:ratingView];
         self.ratingView = ratingView;
         [ratingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView).offset(20);
+            make.left.equalTo(self.contentView).offset(15);
             make.bottom.equalTo(self.contentView).offset(-10);
             make.height.equalTo(@25);
             make.width.equalTo(@80);
         }];
         
+        UILabel *ratingLabel = [[UILabel alloc] init];
+        ratingLabel.textColor = [UIColor whiteColor];
+        ratingLabel.font = [UIFont systemFontOfSize:12.0f];
+        [self.contentView addSubview:ratingLabel];
+        self.ratingLabel = ratingLabel;
+        [ratingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(ratingView.mas_right).offset(5);
+            make.centerY.equalTo(ratingView);
+        }];
+        
         UIButton *shareButton= [[UIButton alloc] init];
         [shareButton setImage:[UIImage imageNamed:@"home_share_icon"] forState:UIControlStateDisabled];
-        shareButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        shareButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
         shareButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         shareButton.enabled = NO;
         [self.contentView addSubview:shareButton];
         self.shareButton = shareButton;
         [shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.width.height.equalTo(ratingView);
-            make.left.equalTo(ratingView.mas_right);
+            make.left.equalTo(ratingLabel.mas_right);
         }];
         
         UILabel *durationLabel = [[UILabel alloc] init];
         durationLabel.textColor = [UIColor whiteColor];
-        durationLabel.font = [UIFont systemFontOfSize:14.0f];
+        durationLabel.font = [UIFont systemFontOfSize:12.0f];
         durationLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:durationLabel];
         self.durationLabel = durationLabel;
         [durationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.width.height.equalTo(ratingView);
-            make.right.equalTo(self.contentView).offset(-20);
+            make.right.equalTo(self.contentView).offset(-15);
         }];
         
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.font = [UIFont systemFontOfSize:17.0f];
-        titleLabel.preferredMaxLayoutWidth = App_Frame_Width - 40;
+        titleLabel.font = [UIFont systemFontOfSize:16.0f];
+        titleLabel.preferredMaxLayoutWidth = App_Frame_Width - 30;
         titleLabel.numberOfLines = 0;
         [self.contentView addSubview:titleLabel];
         self.titleLabel = titleLabel;
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.contentView).offset(20);
-            make.bottom.equalTo(ratingView.mas_top).offset(-10);
+            make.left.equalTo(self.contentView).offset(15);
+            make.bottom.equalTo(ratingView.mas_top).offset(-5);
         }];
     }
     return  self;
@@ -120,7 +134,13 @@
     self.durationLabel.text = movie.duration;
     [self.shareButton setTitle:movie.share_num forState:UIControlStateNormal];
     self.ratingView.value = movie.rating.integerValue * 0.5;
+    self.ratingLabel.text = movie.rating;
 }
 
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    self.shadowView.hidden = selected;
+}
 
 @end

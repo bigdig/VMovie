@@ -8,8 +8,8 @@
 
 #import "HomeViewController.h"
 #import "UIBarButtonItem+Custom.h"
-#import "LatestTableViewController.h"
-#import "HotTableViewController.h"
+#import "MovieListTableViewController.h"
+#import "SearchMovieViewController.h"
 
 @interface HomeViewController () <UIScrollViewDelegate>
 
@@ -39,11 +39,14 @@
 /** 添加子控制器*/
 - (void) addChildViewControllers {
     
-    LatestTableViewController *latestVc = [[LatestTableViewController alloc] init];
+    MovieListTableViewController *latestVc = [[MovieListTableViewController alloc] init];
+    latestVc.vTitle = @"latest";
     [self addChildViewController:latestVc];
     
-    HotTableViewController *hotVc = [[HotTableViewController alloc] init];
+    MovieListTableViewController *hotVc = [[MovieListTableViewController alloc] init];
+    hotVc.vTitle = @"hot";
     [self addChildViewController:hotVc];
+    
 }
 
 /**容器视图*/
@@ -152,7 +155,10 @@
 }
 
 - (void) searchItemClick {
-    NSLog(@"%s",__func__);
+    [SVProgressHUD dismiss];
+    SearchMovieViewController *searchMovieVc = [[SearchMovieViewController alloc] init];
+//    [self presentViewController:searchMovieVc animated:YES completion:nil];
+    [self.navigationController pushViewController:searchMovieVc animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -181,6 +187,18 @@
     
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
 
 @end

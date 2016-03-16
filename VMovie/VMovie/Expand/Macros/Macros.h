@@ -109,3 +109,6 @@
 
 // 数据存储
 #define UserDefaults [NSUserDefaults standardUserDefaults]
+
+//代理
+#define ApplicationDelegate   ((AppDelegate *)[[UIApplication sharedApplication] delegate])

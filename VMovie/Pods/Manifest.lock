@@ -30,10 +30,13 @@ PODS:
     - ReactiveCocoa/Core
     - Result (~> 1.0.2)
   - Result (1.0.2)
+  - SDCycleScrollView (1.61):
+    - SDWebImage (~> 3.7)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
   - SVProgressHUD (1.1.3)
+  - XXNibBridge (2.2.3)
 
 DEPENDENCIES:
   - AFNetworking
@@ -42,8 +45,10 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - ReactiveCocoa
+  - SDCycleScrollView
   - SDWebImage
   - SVProgressHUD
+  - XXNibBridge
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
@@ -53,7 +58,9 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
+  SDCycleScrollView: a002d85b30cfa9d0ac74069cd3973ca19ff4f22f
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  XXNibBridge: 70adcf1e85a2b5500d9de5f12781944dc51b0521
 
 COCOAPODS: 0.39.0

@@ -34,4 +34,20 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (BOOL)shouldAutorotate
+{
+    return [self.visibleViewController shouldAutorotate];
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [self.visibleViewController supportedInterfaceOrientations];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+
+
 @end
