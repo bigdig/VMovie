@@ -36,7 +36,7 @@
 
 @implementation MovieListTableViewController
 
-static NSString *movieCellIdentifier = @"movieCellIdentifier";
+static NSString * const movieCellIdentifier = @"movieCellIdentifier";
 
 - (AFHTTPSessionManager *)manager {
     
@@ -114,9 +114,22 @@ static NSString *movieCellIdentifier = @"movieCellIdentifier";
 }
 
 - (void) setupRefresh {
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadLatestMovies)];
+    [header setTitle:@"下拉刷新..." forState:MJRefreshStateIdle];
+    [header setTitle:@"释放立即刷新" forState:MJRefreshStatePulling];
+    [header setTitle:@"刷新中..." forState:MJRefreshStateRefreshing];
+    // 设置字体
+    header.stateLabel.font = [UIFont systemFontOfSize:15];
+    header.stateLabel.shadowColor = [UIColor blackColor];
+    header.stateLabel.shadowOffset = CGSizeMake(0.1, 0.1);
+    header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:12];
     
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadLatestMovies)];
-    [self.tableView.mj_header beginRefreshing];
+    // 设置颜色
+    header.stateLabel.textColor = RGBCOLOR(125, 136, 157);
+    header.lastUpdatedTimeLabel.textColor = RGBCOLOR(125, 136, 157);
+    
+    self.tableView.mj_header = header;
+    [self loadLatestMovies];
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
     
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreMovies)];

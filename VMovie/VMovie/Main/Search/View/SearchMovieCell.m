@@ -43,7 +43,7 @@
             make.left.equalTo(self.contentView).offset(10);
             make.top.equalTo(self.contentView).offset(5);
             make.bottom.equalTo(self.contentView).offset(-5);
-            make.width.equalTo(@(ScaleFrom_iPhone5_Desgin(App_Frame_Width * 0.3)));
+            make.width.equalTo(@(ScaleFrom_iPhone5_Desgin(App_Frame_Width * 0.35)));
         }];
         
         UIImageView *shadowView = [[UIImageView alloc] init];
@@ -68,14 +68,14 @@
         
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.textColor = [UIColor blackColor];
-        titleLabel.font = [UIFont systemFontOfSize:16.0f];
+        titleLabel.font = [UIFont systemFontOfSize:14.0f];
         titleLabel.numberOfLines = 0;
         [self.contentView addSubview:titleLabel];
         self.titleLabel = titleLabel;
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(pictureView.mas_right).offset(15);
+            make.left.equalTo(pictureView.mas_right).offset(ScaleFrom_iPhone5_Desgin(10));
             make.right.equalTo(self.contentView).offset(-10);
-            make.top.equalTo(pictureView).offset(20);
+            make.top.equalTo(pictureView).offset(ScaleFrom_iPhone5_Desgin(10));
         }];
         
         HCSStarRatingView *ratingView = [[HCSStarRatingView alloc] init];
@@ -90,10 +90,10 @@
         [self.contentView addSubview:ratingView];
         self.ratingView = ratingView;
         [ratingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(pictureView.mas_right).offset(15);
-            make.bottom.equalTo(pictureView).offset(- 8);
-            make.height.equalTo(@25);
-            make.width.equalTo(@80);
+            make.left.equalTo(pictureView.mas_right).offset(ScaleFrom_iPhone5_Desgin(10));
+            make.bottom.equalTo(pictureView).offset(- ScaleFrom_iPhone5_Desgin(5));
+            make.height.equalTo(@(ScaleFrom_iPhone5_Desgin(25)));
+            make.width.equalTo(@(ScaleFrom_iPhone5_Desgin(70)));
         }];
         
         UILabel *ratingLabel = [[UILabel alloc] init];
@@ -115,8 +115,9 @@
         [self.contentView addSubview:shareButton];
         self.shareButton = shareButton;
         [shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.width.height.equalTo(ratingView);
+            make.bottom.height.equalTo(ratingView);
             make.left.equalTo(ratingLabel.mas_right);
+            make.width.equalTo(@(ScaleFrom_iPhone5_Desgin(50)));
         }];
         
         UIImageView *separatorView = [[UIImageView alloc] init];

@@ -47,6 +47,7 @@
     // 返回按钮事件
     __weak typeof(self) weakSelf = self;
     self.playerView.goBackBlock = ^{
+        [SVProgressHUD dismiss];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     

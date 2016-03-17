@@ -121,9 +121,9 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (!self.showHistory) {
-        return 120;
+        return ScaleFrom_iPhone5_Desgin(100);
     } else {
-        return 50;
+        return ScaleFrom_iPhone5_Desgin(40);
     }
 }
 
@@ -190,7 +190,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 - (void) setupTableView {
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, App_Frame_Width, App_Frame_Height - 64) style:UITableViewStyleGrouped];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, App_Frame_Width, App_Frame_Height - 44) style:UITableViewStyleGrouped];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.backgroundColor = [UIColor whiteColor];
@@ -227,25 +227,25 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
     self.searchBar = searchBar;
     [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(topView).offset(20);
-        make.bottom.equalTo(topView).offset(-10);
-        make.width.equalTo(@(App_Frame_Width - 100));
+        make.bottom.equalTo(topView).offset(-7);
+        make.width.equalTo(@(App_Frame_Width - 80));
         make.height.equalTo(@30);
     }];
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
     [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    cancelButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+    cancelButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     [topView addSubview:cancelButton];
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(searchBar.mas_right).offset(20);
+        make.left.equalTo(searchBar.mas_right).offset(10);
         make.bottom.height.equalTo(searchBar);
-        make.right.equalTo(topView).offset(-20);
+        make.right.equalTo(topView).offset(-15);
     }];
     [[cancelButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         @strongify(self);
-//        [self dismissViewControllerAnimated:YES completion:nil];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.view endEditing:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
     
     UIImageView *separatorView = [[UIImageView alloc] init];

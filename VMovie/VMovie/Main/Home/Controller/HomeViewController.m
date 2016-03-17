@@ -10,6 +10,9 @@
 #import "UIBarButtonItem+Custom.h"
 #import "MovieListTableViewController.h"
 #import "SearchMovieViewController.h"
+#import "VMAnimator.h"
+#import "DetailViewController.h"
+#import "UIImage+Category.h"
 
 @interface HomeViewController () <UIScrollViewDelegate>
 
@@ -151,14 +154,22 @@
 }
 
 - (void) detailItemClick {
-    NSLog(@"%s",__func__);
+    DetailViewController *detailVc = [[DetailViewController alloc] init];
+    detailVc.bgImage = [UIImage imageWithCaptureOfView:self.view];
+    detailVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:detailVc animated:YES completion:nil];
 }
 
 - (void) searchItemClick {
     [SVProgressHUD dismiss];
     SearchMovieViewController *searchMovieVc = [[SearchMovieViewController alloc] init];
-//    [self presentViewController:searchMovieVc animated:YES completion:nil];
-    [self.navigationController pushViewController:searchMovieVc animated:YES];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:searchMovieVc];
+
+//    nav.transitioningDelegate = [VMAnimator sharedAnimator];
+//    nav.modalPresentationStyle = UIModalPresentationCustom;
+    nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:nav animated:YES completion:nil];
+//    [self.navigationController pushViewController:searchMovieVc animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

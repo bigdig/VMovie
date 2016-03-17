@@ -11,6 +11,7 @@
 #import "EaseStartView.h"
 #import "NewFeatureViewController.h"
 #import "VMNavigationController.h"
+#import "DetailViewController.h"
 
 @interface AppDelegate ()
 
@@ -31,7 +32,7 @@
     
     if ([currentVersion isEqualToString:sandboxVersion]) {
         VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
-        self.window.rootViewController = vmNav;
+        self.window.rootViewController =vmNav;
     } else {
         self.window.rootViewController = [[NewFeatureViewController alloc] init];
         [UserDefaults setObject:currentVersion forKey:@"AppVersion"];
