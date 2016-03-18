@@ -50,6 +50,9 @@
 		71811A801C997CBE0054D7CD /* MovieChannelCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71811A7F1C997CBE0054D7CD /* MovieChannelCollectionViewController.m */; };
 		71811A831C99830C0054D7CD /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71811A821C99830C0054D7CD /* Channel.m */; };
 		71811A861C9984980054D7CD /* ChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71811A851C9984980054D7CD /* ChannelCell.m */; };
+		71E979B41C9AE42D008A836D /* VMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979AF1C9AE42D008A836D /* VMPageControl.m */; };
+		71E979B51C9AE42D008A836D /* YZCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979B11C9AE42D008A836D /* YZCarouselCell.m */; };
+		71E979B61C9AE42D008A836D /* YZCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979B31C9AE42D008A836D /* YZCarouselView.m */; };
 		71FB50681C94579B00771990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB50671C94579B00771990 /* main.m */; };
 		71FB506B1C94579B00771990 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB506A1C94579B00771990 /* AppDelegate.m */; };
 		71FB50731C94579B00771990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB50721C94579B00771990 /* Assets.xcassets */; };
@@ -151,6 +154,12 @@
 		71811A821C99830C0054D7CD /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		71811A841C9984980054D7CD /* ChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelCell.h; sourceTree = "<group>"; };
 		71811A851C9984980054D7CD /* ChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelCell.m; sourceTree = "<group>"; };
+		71E979AE1C9AE42D008A836D /* VMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMPageControl.h; sourceTree = "<group>"; };
+		71E979AF1C9AE42D008A836D /* VMPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VMPageControl.m; sourceTree = "<group>"; };
+		71E979B01C9AE42D008A836D /* YZCarouselCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZCarouselCell.h; sourceTree = "<group>"; };
+		71E979B11C9AE42D008A836D /* YZCarouselCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZCarouselCell.m; sourceTree = "<group>"; };
+		71E979B21C9AE42D008A836D /* YZCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZCarouselView.h; sourceTree = "<group>"; };
+		71E979B31C9AE42D008A836D /* YZCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZCarouselView.m; sourceTree = "<group>"; };
 		71FB50631C94579B00771990 /* VMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB50671C94579B00771990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		71FB50691C94579B00771990 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -385,6 +394,20 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		71E979AD1C9AE42D008A836D /* YZCarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				71E979AE1C9AE42D008A836D /* VMPageControl.h */,
+				71E979AF1C9AE42D008A836D /* VMPageControl.m */,
+				71E979B01C9AE42D008A836D /* YZCarouselCell.h */,
+				71E979B11C9AE42D008A836D /* YZCarouselCell.m */,
+				71E979B21C9AE42D008A836D /* YZCarouselView.h */,
+				71E979B31C9AE42D008A836D /* YZCarouselView.m */,
+			);
+			name = YZCarouselView;
+			path = ../../../Vendor/YZCarouselView;
+			sourceTree = "<group>";
+		};
 		71FB505A1C94579B00771990 = {
 			isa = PBXGroup;
 			children = (
@@ -600,6 +623,7 @@
 		71FB50C41C945C1B00771990 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				71E979AD1C9AE42D008A836D /* YZCarouselView */,
 				7137ABC51C96ED5700030DBD /* MovieCell.h */,
 				7137ABC61C96ED5700030DBD /* MovieCell.m */,
 			);
@@ -821,6 +845,7 @@
 				7137ABA81C95B7D500030DBD /* Const.m in Sources */,
 				7137AB811C95991D00030DBD /* EaseStartView.m in Sources */,
 				71811A701C9931750054D7CD /* DetailViewController.m in Sources */,
+				71E979B41C9AE42D008A836D /* VMPageControl.m in Sources */,
 				71811A831C99830C0054D7CD /* Channel.m in Sources */,
 				71811A861C9984980054D7CD /* ChannelCell.m in Sources */,
 				7137ABFF1C97EA1100030DBD /* SearchBar.m in Sources */,
@@ -838,6 +863,8 @@
 				7137AB871C95A8BC00030DBD /* NewFeatureViewController.m in Sources */,
 				71FB50C71C945C2D00771990 /* HomeViewController.m in Sources */,
 				7137ABD81C97933600030DBD /* Banner.m in Sources */,
+				71E979B61C9AE42D008A836D /* YZCarouselView.m in Sources */,
+				71E979B51C9AE42D008A836D /* YZCarouselCell.m in Sources */,
 				7137ABB51C95C50900030DBD /* VMNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

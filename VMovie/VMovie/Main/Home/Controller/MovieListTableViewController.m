@@ -10,14 +10,14 @@
 #import <AFNetworking/AFNetworking.h>
 #import <MJExtension/MJExtension.h>
 #import <MJRefresh/MJRefresh.h>
-#import <SDCycleScrollView/SDCycleScrollView.h>
 #import "Movie.h"
 #import "MovieCell.h"
 #import "Banner.h"
 #import "MoviePlayerViewController.h"
+#import "YZCarouselView.h"
 
 
-@interface MovieListTableViewController () <SDCycleScrollViewDelegate>
+@interface MovieListTableViewController ()
 /**微电影数据 */
 @property (nonatomic, strong) NSMutableArray *movieArray;
 
@@ -31,7 +31,7 @@
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
 
 /** 广告视图 */
-@property (nonatomic, weak) SDCycleScrollView *cycleScrollView;
+@property (nonatomic, weak) YZCarouselView *carouselView;
 @end
 
 @implementation MovieListTableViewController
@@ -81,14 +81,20 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     UIView *bannerView = [[UIView alloc] init];
     bannerView.width = App_Frame_Width;
     bannerView.height = ScaleFrom_iPhone5_Desgin(200);
-    bannerView.backgroundColor = [UIColor cyanColor];
+    bannerView.backgroundColor = [UIColor whiteColor];
     bannerView.clipsToBounds = YES;
     self.tableView.tableHeaderView = bannerView;
-    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:bannerView.bounds delegate:self placeholderImage:[UIImage imageNamed:@"common_button_hi"]];
-    cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-    cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
-    [bannerView addSubview:cycleScrollView];
-    self.cycleScrollView = cycleScrollView;
+    YZCarouselView *carouselView = [[YZCarouselView alloc] initWithFrame:bannerView.bounds];
+    carouselView.backgroundColor = [UIColor whiteColor];
+    [bannerView addSubview:carouselView];
+    self.carouselView = carouselView;
+    
+    @weakify(self);
+    carouselView.selecItemBlock = ^(NSInteger index) {
+        @strongify(self);
+        Banner *banner = self.bannerArray[index];
+        NSLog(@"%@--%@",banner.bannerid,banner.extra);
+    };
     
     [self loadBanner];
 }
@@ -101,12 +107,13 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
         
         NSMutableArray *urlArray = [NSMutableArray array];
         NSMutableArray *titleArray = [NSMutableArray array];
+
         for (Banner *banner in self.bannerArray) {
             [urlArray addObject:[NSURL URLWithString:banner.image]];
             [titleArray addObject:banner.title];
         }
-        self.cycleScrollView.imageURLStringsGroup = urlArray;
-        self.cycleScrollView.titlesGroup = titleArray;
+        self.carouselView.imageArray = urlArray;
+        self.carouselView.titleArray = titleArray;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
