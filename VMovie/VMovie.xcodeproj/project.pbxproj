@@ -53,6 +53,12 @@
 		71E979B41C9AE42D008A836D /* VMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979AF1C9AE42D008A836D /* VMPageControl.m */; };
 		71E979B51C9AE42D008A836D /* YZCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979B11C9AE42D008A836D /* YZCarouselCell.m */; };
 		71E979B61C9AE42D008A836D /* YZCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979B31C9AE42D008A836D /* YZCarouselView.m */; };
+		71E979F91C9BD0DB008A836D /* NSString+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979F81C9BD0DB008A836D /* NSString+JSON.m */; };
+		71E979FC1C9BD32A008A836D /* BannerADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979FB1C9BD32A008A836D /* BannerADViewController.m */; };
+		71E979FF1C9BDC41008A836D /* BackStageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E979FE1C9BDC41008A836D /* BackStageViewController.m */; };
+		71E97A021C9BE140008A836D /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E97A011C9BE140008A836D /* ArticlesTableViewController.m */; };
+		71E97A471C9C41C3008A836D /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E97A461C9C41C3008A836D /* ArticleCell.m */; };
+		71E97A4A1C9C50A0008A836D /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E97A491C9C50A0008A836D /* ArticleWebViewController.m */; };
 		71FB50681C94579B00771990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB50671C94579B00771990 /* main.m */; };
 		71FB506B1C94579B00771990 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FB506A1C94579B00771990 /* AppDelegate.m */; };
 		71FB50731C94579B00771990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB50721C94579B00771990 /* Assets.xcassets */; };
@@ -160,6 +166,18 @@
 		71E979B11C9AE42D008A836D /* YZCarouselCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZCarouselCell.m; sourceTree = "<group>"; };
 		71E979B21C9AE42D008A836D /* YZCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZCarouselView.h; sourceTree = "<group>"; };
 		71E979B31C9AE42D008A836D /* YZCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZCarouselView.m; sourceTree = "<group>"; };
+		71E979F71C9BD0DB008A836D /* NSString+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JSON.h"; sourceTree = "<group>"; };
+		71E979F81C9BD0DB008A836D /* NSString+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JSON.m"; sourceTree = "<group>"; };
+		71E979FA1C9BD32A008A836D /* BannerADViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerADViewController.h; sourceTree = "<group>"; };
+		71E979FB1C9BD32A008A836D /* BannerADViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerADViewController.m; sourceTree = "<group>"; };
+		71E979FD1C9BDC41008A836D /* BackStageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackStageViewController.h; sourceTree = "<group>"; };
+		71E979FE1C9BDC41008A836D /* BackStageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackStageViewController.m; sourceTree = "<group>"; };
+		71E97A001C9BE140008A836D /* ArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesTableViewController.h; sourceTree = "<group>"; };
+		71E97A011C9BE140008A836D /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
+		71E97A451C9C41C3008A836D /* ArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCell.h; sourceTree = "<group>"; };
+		71E97A461C9C41C3008A836D /* ArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
+		71E97A481C9C50A0008A836D /* ArticleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleWebViewController.h; sourceTree = "<group>"; };
+		71E97A491C9C50A0008A836D /* ArticleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleWebViewController.m; sourceTree = "<group>"; };
 		71FB50631C94579B00771990 /* VMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB50671C94579B00771990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		71FB50691C94579B00771990 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -355,6 +373,12 @@
 				71811A7F1C997CBE0054D7CD /* MovieChannelCollectionViewController.m */,
 				71673A961C9A308C002581DE /* ChannelClubTableViewController.h */,
 				71673A971C9A308C002581DE /* ChannelClubTableViewController.m */,
+				71E979FD1C9BDC41008A836D /* BackStageViewController.h */,
+				71E979FE1C9BDC41008A836D /* BackStageViewController.m */,
+				71E97A001C9BE140008A836D /* ArticlesTableViewController.h */,
+				71E97A011C9BE140008A836D /* ArticlesTableViewController.m */,
+				71E97A481C9C50A0008A836D /* ArticleWebViewController.h */,
+				71E97A491C9C50A0008A836D /* ArticleWebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -379,6 +403,8 @@
 				71811A7C1C9956310054D7CD /* DetailListCell.m */,
 				71811A841C9984980054D7CD /* ChannelCell.h */,
 				71811A851C9984980054D7CD /* ChannelCell.m */,
+				71E97A451C9C41C3008A836D /* ArticleCell.h */,
+				71E97A461C9C41C3008A836D /* ArticleCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -515,6 +541,8 @@
 				7137ABAD1C95C0D800030DBD /* UIBarButtonItem+Custom.m */,
 				71811A721C9933F70054D7CD /* UIImage+Category.h */,
 				71811A731C9933F70054D7CD /* UIImage+Category.m */,
+				71E979F71C9BD0DB008A836D /* NSString+JSON.h */,
+				71E979F81C9BD0DB008A836D /* NSString+JSON.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -605,6 +633,8 @@
 				7137ABE31C97AAD300030DBD /* MovieListTableViewController.m */,
 				7137ABE51C97ADB300030DBD /* MoviePlayerViewController.h */,
 				7137ABE61C97ADB300030DBD /* MoviePlayerViewController.m */,
+				71E979FA1C9BD32A008A836D /* BannerADViewController.h */,
+				71E979FB1C9BD32A008A836D /* BannerADViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -834,6 +864,7 @@
 				71811A161C990F1C0054D7CD /* VMAnimator.m in Sources */,
 				7137ABE41C97AAD300030DBD /* MovieListTableViewController.m in Sources */,
 				71673A981C9A308C002581DE /* ChannelClubTableViewController.m in Sources */,
+				71E97A4A1C9C50A0008A836D /* ArticleWebViewController.m in Sources */,
 				7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */,
 				7137ABE71C97ADB300030DBD /* MoviePlayerViewController.m in Sources */,
 				7137ABEF1C97B51500030DBD /* ZFPlayerMaskView.m in Sources */,
@@ -843,6 +874,7 @@
 				7137ABC41C96EA0200030DBD /* Movie.m in Sources */,
 				71811A741C9933F70054D7CD /* UIImage+Category.m in Sources */,
 				7137ABA81C95B7D500030DBD /* Const.m in Sources */,
+				71E97A471C9C41C3008A836D /* ArticleCell.m in Sources */,
 				7137AB811C95991D00030DBD /* EaseStartView.m in Sources */,
 				71811A701C9931750054D7CD /* DetailViewController.m in Sources */,
 				71E979B41C9AE42D008A836D /* VMPageControl.m in Sources */,
@@ -855,13 +887,17 @@
 				71FB50681C94579B00771990 /* main.m in Sources */,
 				7137ABFC1C97E61F00030DBD /* SearchMovieViewController.m in Sources */,
 				7137AB8A1C95AB2500030DBD /* NewFeatureCell.m in Sources */,
+				71E979FF1C9BDC41008A836D /* BackStageViewController.m in Sources */,
 				71811A7A1C9954040054D7CD /* DetailHeaderView.m in Sources */,
 				7137AC411C98330500030DBD /* SearchMovieCell.m in Sources */,
 				7137AB841C95A2A200030DBD /* UIView+Frame.m in Sources */,
 				71811A771C994BFC0054D7CD /* VMVerticalButton.m in Sources */,
+				71E979FC1C9BD32A008A836D /* BannerADViewController.m in Sources */,
 				7137ABC71C96ED5700030DBD /* MovieCell.m in Sources */,
+				71E97A021C9BE140008A836D /* ArticlesTableViewController.m in Sources */,
 				7137AB871C95A8BC00030DBD /* NewFeatureViewController.m in Sources */,
 				71FB50C71C945C2D00771990 /* HomeViewController.m in Sources */,
+				71E979F91C9BD0DB008A836D /* NSString+JSON.m in Sources */,
 				7137ABD81C97933600030DBD /* Banner.m in Sources */,
 				71E979B61C9AE42D008A836D /* YZCarouselView.m in Sources */,
 				71E979B51C9AE42D008A836D /* YZCarouselCell.m in Sources */,

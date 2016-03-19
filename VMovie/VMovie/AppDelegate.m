@@ -12,6 +12,7 @@
 #import "NewFeatureViewController.h"
 #import "VMNavigationController.h"
 #import "DetailViewController.h"
+#import "BackStageViewController.h"
 
 @interface AppDelegate ()
 
@@ -32,7 +33,8 @@
     
     if ([currentVersion isEqualToString:sandboxVersion]) {
         VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
-        self.window.rootViewController =vmNav;
+//        VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[BackStageViewController alloc] init]];
+        self.window.rootViewController = vmNav;
     } else {
         self.window.rootViewController = [[NewFeatureViewController alloc] init];
         [UserDefaults setObject:currentVersion forKey:@"AppVersion"];

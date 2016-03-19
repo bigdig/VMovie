@@ -15,6 +15,7 @@
 #import "Banner.h"
 #import "MoviePlayerViewController.h"
 #import "YZCarouselView.h"
+#import "BannerADViewController.h"
 
 
 @interface MovieListTableViewController ()
@@ -93,7 +94,26 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     carouselView.selecItemBlock = ^(NSInteger index) {
         @strongify(self);
         Banner *banner = self.bannerArray[index];
-        NSLog(@"%@--%@",banner.bannerid,banner.extra);
+        NSLog(@"%ld--%@",banner.bannerType,banner.bannerURL);
+        switch (banner.bannerType) {
+            case BannerTypeMovie: {
+                Movie *movie = [[Movie alloc] init];
+                movie.postid = banner.bannerURL;
+                MoviePlayerViewController *moviePlayerVc = [[MoviePlayerViewController alloc] init];
+                moviePlayerVc.movie = movie;
+                [self.navigationController pushViewController:moviePlayerVc animated:YES];
+            }
+                break;
+            case BannerTypeAD:{
+                
+                BannerADViewController *BannerADVc = [[BannerADViewController alloc] init];
+                BannerADVc.banner = banner;
+                [self.navigationController pushViewController:BannerADVc animated:YES];
+            }
+                break;
+            default:
+                break;
+        }
     };
     
     [self loadBanner];

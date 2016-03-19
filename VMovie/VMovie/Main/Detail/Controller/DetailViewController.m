@@ -11,6 +11,7 @@
 #import "DetailListCell.h"
 #import "MovieChannelCollectionViewController.h"
 #import "VMNavigationController.h"
+#import "BackStageViewController.h"
 
 @interface DetailViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -142,10 +143,18 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-    if (indexPath.row == 1) {
+    if (indexPath.row == 1) { // 点击频道
         
         MovieChannelCollectionViewController *movieChannelVc = [[MovieChannelCollectionViewController alloc] init];
         VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:movieChannelVc];
+        vmNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:vmNav animated:YES completion:nil];
+    }
+    
+    if (indexPath.row == 3) { //点击幕后
+        
+        BackStageViewController *backStageVc = [[BackStageViewController alloc] init];
+        VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:backStageVc];
         vmNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:vmNav animated:YES completion:nil];
     }

@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger,BannerType) {
+    BannerTypeMovie = 2,
+    BannerTypeAD = 1
+};
+
 @interface Banner : NSObject
 /**编号 */
 @property (nonatomic, copy) NSString *bannerid;
@@ -19,5 +24,11 @@
 @property (nonatomic, copy) NSString *addtime;
 /**额外信息 */
 @property (nonatomic, copy) NSString *extra;
+
+/**类型 */
+@property (nonatomic, assign) BannerType bannerType;
+
+/**连接 */
+@property (nonatomic, copy) NSString *bannerURL;
 
 @end
