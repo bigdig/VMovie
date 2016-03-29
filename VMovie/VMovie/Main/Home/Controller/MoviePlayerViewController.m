@@ -10,10 +10,13 @@
 #import <AFNetworking/AFNetworking.h>
 #import "Movie.h"
 #import "ZFPlayerView.h"
+#import <WebKit/WebKit.h>
 
-@interface MoviePlayerViewController ()<UIWebViewDelegate>
-
-
+@interface MoviePlayerViewController ()<WKScriptMessageHandler,WKUIDelegate>
+/**webView */
+@property (nonatomic, strong) WKWebView *webView;
+/**进度条 */
+@property (nonatomic, strong) UIProgressView *progressView;
 /**播放器 */
 @property (nonatomic, strong) ZFPlayerView *playerView;
 @end
@@ -25,7 +28,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
 //    http://app.vmoiver.com/48318?qingapp=app_new&debug=1
-    
     UIView *blackView = [[UIView alloc] init];
     blackView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:blackView];
@@ -50,19 +52,41 @@
         [SVProgressHUD dismiss];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
+   
     
-    UIWebView *webView = [[UIWebView alloc] init];
-    webView.backgroundColor = [UIColor whiteColor];
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    config.preferences = [[WKPreferences alloc] init];
+    config.preferences.minimumFontSize = 10;
+    config.preferences.javaScriptEnabled = YES;
+    config.preferences.javaScriptCanOpenWindowsAutomatically = NO;
+    config.userContentController = [[WKUserContentController alloc] init];
+    [config.userContentController addScriptMessageHandler:self name:@"VMovie"];
+    
+    self.webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
+    self.webView.backgroundColor = [UIColor whiteColor];
     NSString *urlString = [NSString stringWithFormat:@"http://app.vmoiver.com/%@?qingapp=app_new&debug=1",self.movie.postid];
     NSURL *vURL = [NSURL URLWithString:urlString];
-    NSURLRequest *requset = [NSURLRequest requestWithURL:vURL];
-    [webView loadRequest:requset];
-    webView.delegate = self;
-    [self.view addSubview:webView];
-    [webView mas_makeConstraints:^(MASConstraintMaker *make) {
+    NSURLRequest *request = [NSURLRequest requestWithURL:vURL];
+    [self.webView loadRequest:request];
+    [self.view addSubview:self.webView];
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.equalTo(self.view);
         make.top.equalTo(self.playerView.mas_bottom);
     }];
+    
+    self.webView.UIDelegate = self;
+    
+    self.progressView = [[UIProgressView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:self.progressView];
+    self.progressView.backgroundColor = [UIColor redColor];
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.webView);
+        make.height.equalTo(@2);
+    }];
+    
+    [self.webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:nil];
+    [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void) getMovieURL {
@@ -127,12 +151,55 @@
 
 #pragma mark - UIWebViewDelegate 
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    [SVProgressHUD show];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"loading"]) {
+        
+    } else if ([keyPath isEqualToString:@"title"]) {
+        self.navigationItem.title = self.webView.title;
+    } else if ([keyPath isEqualToString:@"estimatedProgress"]) {
+        self.progressView.progress = self.webView.estimatedProgress;
+    }
+    
+    if (!self.webView.loading) {
+        
+        [self.webView evaluateJavaScript:  @"var links = document.getElementsByClassName('new-view-link');"
+         " for(var i=0;i<links.length;i++){"
+         "var link = links[i];"
+         " link.onclick = function(){"
+         " var viewId = this.getAttribute('data-id');"
+         "var viewType = this.getAttribute('data-type');"
+         "window.webkit.messageHandlers.VMovie.postMessage({'viewId': viewId,'viewType':viewType});"
+         "  }"
+         "  }" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+         }];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            self.progressView.alpha = 0;
+        }];
+    }
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [SVProgressHUD dismiss];
+#pragma mark - WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    
+    if ([message.name isEqualToString:@"VMovie"]) {
+        Movie *movie = [[Movie alloc] init];
+        movie.postid = message.body[@"viewId"];
+        MoviePlayerViewController *moviePlayerVc = [[MoviePlayerViewController alloc] init];
+        moviePlayerVc.movie = movie;
+        [self.navigationController pushViewController:moviePlayerVc animated:YES];
+    }
 }
+
+#pragma mark - WKUIDelegate
+-(void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }]];
+    [self presentViewController:alert animated:YES completion:NULL];
+}
+
 
 @end

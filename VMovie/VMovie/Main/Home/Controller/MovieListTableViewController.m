@@ -7,7 +7,6 @@
 //
 
 #import "MovieListTableViewController.h"
-#import <AFNetworking/AFNetworking.h>
 #import <MJExtension/MJExtension.h>
 #import <MJRefresh/MJRefresh.h>
 #import "Movie.h"
@@ -28,8 +27,6 @@
 /**广告数据 */
 @property (nonatomic, strong) NSMutableArray *bannerArray;
 
-/**manager */
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
 
 /** 广告视图 */
 @property (nonatomic, weak) YZCarouselView *carouselView;
@@ -38,14 +35,6 @@
 @implementation MovieListTableViewController
 
 static NSString * const movieCellIdentifier = @"movieCellIdentifier";
-
-- (AFHTTPSessionManager *)manager {
-    
-    if (! _manager) {
-        _manager = [AFHTTPSessionManager manager];
-    }
-    return _manager;
-}
 
 - (NSMutableArray *)bannerArray {
     
@@ -70,13 +59,14 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     self.tableView.rowHeight = ScaleFrom_iPhone5_Desgin(200);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self setupRefresh];
-    
     if ([self.vTitle isEqualToString:@"latest"]) {
         [self setupBannerView];
     }
+    
+    [self setupRefresh];
 }
 
+//设置轮播图
 - (void) setupBannerView {
     //    http://app.vmoiver.com/apiv3/index/getBanner/?
     UIView *bannerView = [[UIView alloc] init];
@@ -94,7 +84,7 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     carouselView.selecItemBlock = ^(NSInteger index) {
         @strongify(self);
         Banner *banner = self.bannerArray[index];
-        NSLog(@"%ld--%@",banner.bannerType,banner.bannerURL);
+//        NSLog(@"%ld--%@",banner.bannerType,banner.bannerURL);
         switch (banner.bannerType) {
             case BannerTypeMovie: {
                 Movie *movie = [[Movie alloc] init];
@@ -115,31 +105,30 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
                 break;
         }
     };
-    
-    [self loadBanner];
 }
 
+//网络请求加载banner
 - (void) loadBanner{
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/index/getBanner/?" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/index/getBanner/?" parameters:nil success:^(id  _Nullable responseObject) {
         self.bannerArray = [Banner mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         NSMutableArray *urlArray = [NSMutableArray array];
         NSMutableArray *titleArray = [NSMutableArray array];
-
+        
         for (Banner *banner in self.bannerArray) {
             [urlArray addObject:[NSURL URLWithString:banner.image]];
             [titleArray addObject:banner.title];
         }
         self.carouselView.imageArray = urlArray;
         self.carouselView.titleArray = titleArray;
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    
+    } failure:^(NSError * _Nonnull error) {
         
     }];
 }
 
+//设置上下拉刷新
 - (void) setupRefresh {
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadLatestMovies)];
     [header setTitle:@"下拉刷新..." forState:MJRefreshStateIdle];
@@ -162,55 +151,63 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreMovies)];
 }
 
+//加载最新数据
 - (void) loadLatestMovies {
-    
-    [SVProgressHUD show];
+ 
+    [self.view beginLoading];
     [self.tableView.mj_footer endRefreshing];
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
     
     if ([self.vTitle isEqualToString:@"latest"]) {
         [self loadBanner];
     }
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"p"] = @1;
     params[@"tab"] = self.vTitle;
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
         self.movieArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.tableView reloadData];
         self.page = 1;
         [self.tableView.mj_header endRefreshing];
-        [SVProgressHUD dismiss];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view endLoading];
+
+        @weakify(self);
+        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadLatestMovies];
+        }];
+    } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
-        [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+        [self.view endLoading];
+        @weakify(self);
+        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadLatestMovies];
+        }];
     }];
+    
+
 }
 
+//上拉加载更多数据
 - (void) loadMoreMovies {
     
     [self.tableView.mj_header endRefreshing];
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSInteger page = self.page + 1;
     params[@"p"] = @(page);
     params[@"tab"] = self.vTitle;
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.movieArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];
         self.page = page;
         [self.tableView.mj_footer endRefreshing];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_footer endRefreshing];
-        [SVProgressHUD showErrorWithStatus:@"网络不给力"];
     }];
 }
 
@@ -227,17 +224,17 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:movieCellIdentifier];
     
-    
-    
     return cell;
 }
 
+//在willDisplayCell中更新数据
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MovieCell *movieCell = (MovieCell *)cell;
     movieCell.movie = self.movieArray[indexPath.row];
 }
 
+//跳转到播放界面
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MoviePlayerViewController *moviePlayerVc = [[MoviePlayerViewController alloc] init];

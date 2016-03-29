@@ -52,6 +52,7 @@ static NSString * const reuseIdentifier = @"ArticleCell";
    
     [self.tableView registerClass:[ArticleCell class] forCellReuseIdentifier:reuseIdentifier];
     self.tableView.rowHeight  = ScaleFrom_iPhone5_Desgin(100);
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void) setupRefresh {

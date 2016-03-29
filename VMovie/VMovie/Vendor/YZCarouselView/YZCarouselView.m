@@ -56,11 +56,24 @@ static NSString * const reuseIdentifier = @"CarouselCell";
 
 - (void) setupPageControl {
     
+//    if (self.pageControl) {
+//        [self.pageControl removeFromSuperview];
+//    }
+//    
+//    if (self.imageArray.count <= 1) {
+//        return;
+//    }
+    
     VMPageControl *pageControl = [[VMPageControl alloc] init];
     [self addSubview:pageControl];
     pageControl.pageIndicatorTintColor = [UIColor colorWithWhite:0.8 alpha:0.5];
     pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     self.pageControl = pageControl;
+    
+    self.pageControl.width = 150;
+    self.pageControl.height = 4;
+    self.pageControl.x = (self.width - self.pageControl.width) * 0.5;
+    self.pageControl.y = self.height - self.pageControl.height - 8;
 }
 
 - (void) setupCollectionView {
@@ -111,10 +124,10 @@ static NSString * const reuseIdentifier = @"CarouselCell";
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:nextIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
     
-    self.pageControl.width = 150;
-    self.pageControl.height = 4;
-    self.pageControl.x = (self.width - self.pageControl.width) * 0.5;
-    self.pageControl.y = self.height - self.pageControl.height - 8;
+//    self.pageControl.width = 150;
+//    self.pageControl.height = 4;
+//    self.pageControl.x = (self.width - self.pageControl.width) * 0.5;
+//    self.pageControl.y = self.height - self.pageControl.height - 8;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -128,7 +141,7 @@ static NSString * const reuseIdentifier = @"CarouselCell";
     
    NSInteger itemIndex = indexPath.item % self.imageArray.count;
     YZCarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    [cell.imageView sd_setImageWithURL:self.imageArray[itemIndex]];
+    [cell.imageView sd_setImageWithURL:self.imageArray[itemIndex] placeholderImage:[UIImage imageNamed:@"common_button_hi"]];
     cell.titleLabel.text = self.titleArray[itemIndex];
     return cell;
 }
@@ -143,9 +156,12 @@ static NSString * const reuseIdentifier = @"CarouselCell";
 - (void)setImageArray:(NSArray *)imageArray {
     
     _imageArray = imageArray;
-    self.pageControl.numberOfPages = imageArray.count;
     self.totalItems = self.imageArray.count * 100;
+    
+    self.pageControl.numberOfPages = imageArray.count;
     [self.collectionView reloadData];
+   
+   
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -180,5 +196,6 @@ static NSString * const reuseIdentifier = @"CarouselCell";
         self.timer = nil;
     }
 }
+
 
 @end

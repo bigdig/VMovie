@@ -19,4 +19,5 @@ typedef void (^SelectItemBlock)(NSInteger index);
 
 /**点击item的block */
 @property (nonatomic, copy) SelectItemBlock selecItemBlock;
+
 @end

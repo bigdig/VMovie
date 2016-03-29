@@ -27,7 +27,7 @@
     if (_numberOfPages != numberOfPages) {
         _numberOfPages = numberOfPages;
 
-        //1.获取当前对象的宽
+        //1.获取当前对象的宽高
         CGFloat myWidth = self.frame.size.width;
         CGFloat myHeight = self.frame.size.height;
         CGFloat pointWidth = ( myWidth -  (_numberOfPages - 1) * _pageSpace) / _numberOfPages;
