@@ -208,6 +208,7 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
         [self.tableView.mj_footer endRefreshing];
     } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_footer endRefreshing];
+        [RefreshWarningHUD showWithText:@"网络貌似不给力了哟('_')"];
     }];
 }
 

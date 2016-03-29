@@ -9,7 +9,6 @@
 #import "MovieChannelCollectionViewController.h"
 #import "UIBarButtonItem+Custom.h"
 #import "SearchMovieViewController.h"
-#import <AFNetworking/AFNetworking.h>
 #import <MJExtension/MJExtension.h>
 #import "Channel.h"
 #import "ChannelCell.h"
@@ -61,30 +60,37 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void) loadChannels {
 //    http://app.vmoiver.com/apiv3/cate/getList?
     
-    [SVProgressHUD show];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    [manager GET:@"http://app.vmoiver.com/apiv3/cate/getList?" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.collectionView beginLoading];
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/cate/getList?" parameters:nil success:^(id  _Nullable responseObject) {
         
         self.channelArray = [Channel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
         [self.collectionView reloadData];
-        [SVProgressHUD dismiss];
+        [self.collectionView endLoading];
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        @weakify(self);
+        [self.view configWithData:self.channelArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadChannels];
+        }];
         
-        [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+    } failure:^(NSError * _Nonnull error) {
+        [self.collectionView endLoading];
+        @weakify(self);
+        [self.view configWithData:self.channelArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadChannels];
+        }];
     }];
+    
 }
 
 - (void) detailItemClick {
-    [SVProgressHUD dismiss];
+    [self.collectionView endLoading];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) searchItemClick {
-    [SVProgressHUD dismiss];
+    [self.collectionView endLoading];
     SearchMovieViewController *searchMovieVc = [[SearchMovieViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:searchMovieVc];
     nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

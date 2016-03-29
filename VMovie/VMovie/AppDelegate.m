@@ -49,11 +49,11 @@
     [self.window makeKeyAndVisible];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
     //启动动画
 //    EaseStartView *startView = [EaseStartView startView];
 //    [startView startAnimation];
-    
     return YES;
 }
 

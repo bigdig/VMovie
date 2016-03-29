@@ -12,6 +12,9 @@
 
 @interface BannerADViewController ()<UIWebViewDelegate>
 
+/** webView */
+@property (nonatomic, weak) UIWebView *webView;
+
 @end
 
 @implementation BannerADViewController
@@ -38,18 +41,18 @@
 }
 
 - (void) back {
-    [SVProgressHUD dismiss];
+    [self.webView endLoading];
     [self.navigationController popViewControllerAnimated:YES];
      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [SVProgressHUD show];
+    [webView beginLoading];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [SVProgressHUD dismiss];
+    [webView endLoading];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }

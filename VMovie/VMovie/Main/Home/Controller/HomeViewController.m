@@ -13,6 +13,7 @@
 #import "VMAnimator.h"
 #import "DetailViewController.h"
 #import "UIImage+Category.h"
+#import "YZTopWindow.h"
 
 @interface HomeViewController () <UIScrollViewDelegate>
 
@@ -37,6 +38,9 @@
     [self setupNav];
     
     [self setupContentView];
+    
+    [YZTopWindow show];
+    
 }
 
 /** 添加子控制器*/

@@ -51,6 +51,11 @@
 		71811A831C99830C0054D7CD /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71811A821C99830C0054D7CD /* Channel.m */; };
 		71811A861C9984980054D7CD /* ChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71811A851C9984980054D7CD /* ChannelCell.m */; };
 		71AD780B1CAA147F00D983A0 /* YZNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD780A1CAA147F00D983A0 /* YZNetworking.m */; };
+		71AD780E1CAA338200D983A0 /* NSArray+Categoty.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD780D1CAA338200D983A0 /* NSArray+Categoty.m */; };
+		71AD78111CAA367B00D983A0 /* UITableView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD78101CAA367B00D983A0 /* UITableView+Extension.m */; };
+		71AD78141CAA377200D983A0 /* UIColor+Expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD78131CAA377200D983A0 /* UIColor+Expand.m */; };
+		71AD781A1CAA443100D983A0 /* RefreshWarningHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD78191CAA443100D983A0 /* RefreshWarningHUD.m */; };
+		71AD781D1CAA504200D983A0 /* YZTopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD781C1CAA504200D983A0 /* YZTopWindow.m */; };
 		71D723A21CA50314004B7FC5 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D723A11CA50314004B7FC5 /* UIView+Extension.m */; };
 		71D723A51CA503B7004B7FC5 /* EaseBlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D723A41CA503B7004B7FC5 /* EaseBlankView.m */; };
 		71D723A81CA51232004B7FC5 /* EaseLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D723A71CA51232004B7FC5 /* EaseLoadingView.m */; };
@@ -166,6 +171,16 @@
 		71811A851C9984980054D7CD /* ChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelCell.m; sourceTree = "<group>"; };
 		71AD78091CAA147F00D983A0 /* YZNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZNetworking.h; sourceTree = "<group>"; };
 		71AD780A1CAA147F00D983A0 /* YZNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZNetworking.m; sourceTree = "<group>"; };
+		71AD780C1CAA338200D983A0 /* NSArray+Categoty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Categoty.h"; sourceTree = "<group>"; };
+		71AD780D1CAA338200D983A0 /* NSArray+Categoty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Categoty.m"; sourceTree = "<group>"; };
+		71AD780F1CAA367B00D983A0 /* UITableView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extension.h"; sourceTree = "<group>"; };
+		71AD78101CAA367B00D983A0 /* UITableView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Extension.m"; sourceTree = "<group>"; };
+		71AD78121CAA377200D983A0 /* UIColor+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expand.h"; sourceTree = "<group>"; };
+		71AD78131CAA377200D983A0 /* UIColor+Expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expand.m"; sourceTree = "<group>"; };
+		71AD78181CAA443100D983A0 /* RefreshWarningHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshWarningHUD.h; sourceTree = "<group>"; };
+		71AD78191CAA443100D983A0 /* RefreshWarningHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshWarningHUD.m; sourceTree = "<group>"; };
+		71AD781B1CAA504200D983A0 /* YZTopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZTopWindow.h; sourceTree = "<group>"; };
+		71AD781C1CAA504200D983A0 /* YZTopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZTopWindow.m; sourceTree = "<group>"; };
 		71D723A01CA50314004B7FC5 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		71D723A11CA50314004B7FC5 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		71D723A31CA503B7004B7FC5 /* EaseBlankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseBlankView.h; sourceTree = "<group>"; };
@@ -312,6 +327,8 @@
 			children = (
 				7137ABBF1C963F4D00030DBD /* VMNavigationBar.h */,
 				7137ABC01C963F4D00030DBD /* VMNavigationBar.m */,
+				71AD781B1CAA504200D983A0 /* YZTopWindow.h */,
+				71AD781C1CAA504200D983A0 /* YZTopWindow.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -557,6 +574,12 @@
 				71E979F81C9BD0DB008A836D /* NSString+JSON.m */,
 				71D723A01CA50314004B7FC5 /* UIView+Extension.h */,
 				71D723A11CA50314004B7FC5 /* UIView+Extension.m */,
+				71AD780C1CAA338200D983A0 /* NSArray+Categoty.h */,
+				71AD780D1CAA338200D983A0 /* NSArray+Categoty.m */,
+				71AD780F1CAA367B00D983A0 /* UITableView+Extension.h */,
+				71AD78101CAA367B00D983A0 /* UITableView+Extension.m */,
+				71AD78121CAA377200D983A0 /* UIColor+Expand.h */,
+				71AD78131CAA377200D983A0 /* UIColor+Expand.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -676,6 +699,8 @@
 				71D723A41CA503B7004B7FC5 /* EaseBlankView.m */,
 				71D723A61CA51232004B7FC5 /* EaseLoadingView.h */,
 				71D723A71CA51232004B7FC5 /* EaseLoadingView.m */,
+				71AD78181CAA443100D983A0 /* RefreshWarningHUD.h */,
+				71AD78191CAA443100D983A0 /* RefreshWarningHUD.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -887,6 +912,7 @@
 				71D723A51CA503B7004B7FC5 /* EaseBlankView.m in Sources */,
 				71E97A4A1C9C50A0008A836D /* ArticleWebViewController.m in Sources */,
 				7137ABC11C963F4D00030DBD /* VMNavigationBar.m in Sources */,
+				71AD781D1CAA504200D983A0 /* YZTopWindow.m in Sources */,
 				7137ABE71C97ADB300030DBD /* MoviePlayerViewController.m in Sources */,
 				7137ABEF1C97B51500030DBD /* ZFPlayerMaskView.m in Sources */,
 				71811A191C9910E00054D7CD /* VMPresentationController.m in Sources */,
@@ -900,10 +926,12 @@
 				71811A701C9931750054D7CD /* DetailViewController.m in Sources */,
 				71E979B41C9AE42D008A836D /* VMPageControl.m in Sources */,
 				71811A831C99830C0054D7CD /* Channel.m in Sources */,
+				71AD78141CAA377200D983A0 /* UIColor+Expand.m in Sources */,
 				71811A861C9984980054D7CD /* ChannelCell.m in Sources */,
 				7137ABFF1C97EA1100030DBD /* SearchBar.m in Sources */,
 				71811A7D1C9956310054D7CD /* DetailListCell.m in Sources */,
 				7137ABAE1C95C0D800030DBD /* UIBarButtonItem+Custom.m in Sources */,
+				71AD781A1CAA443100D983A0 /* RefreshWarningHUD.m in Sources */,
 				71811A801C997CBE0054D7CD /* MovieChannelCollectionViewController.m in Sources */,
 				71FB50681C94579B00771990 /* main.m in Sources */,
 				71D723A21CA50314004B7FC5 /* UIView+Extension.m in Sources */,
@@ -921,10 +949,12 @@
 				7137AB871C95A8BC00030DBD /* NewFeatureViewController.m in Sources */,
 				71FB50C71C945C2D00771990 /* HomeViewController.m in Sources */,
 				71E979F91C9BD0DB008A836D /* NSString+JSON.m in Sources */,
+				71AD78111CAA367B00D983A0 /* UITableView+Extension.m in Sources */,
 				7137ABD81C97933600030DBD /* Banner.m in Sources */,
 				71E979B61C9AE42D008A836D /* YZCarouselView.m in Sources */,
 				71E979B51C9AE42D008A836D /* YZCarouselCell.m in Sources */,
 				71AD780B1CAA147F00D983A0 /* YZNetworking.m in Sources */,
+				71AD780E1CAA338200D983A0 /* NSArray+Categoty.m in Sources */,
 				7137ABB51C95C50900030DBD /* VMNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

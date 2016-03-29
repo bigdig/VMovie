@@ -9,7 +9,6 @@
 #import "ChannelClubTableViewController.h"
 #import "UIBarButtonItem+Custom.h"
 #import "Channel.h"
-#import <AFNetworking/AFNetworking.h>
 #import <MJExtension/MJExtension.h>
 #import <MJRefresh/MJRefresh.h>
 #import "MovieCell.h"
@@ -27,22 +26,12 @@
 /**广告数据 */
 @property (nonatomic, strong) NSMutableArray *bannerArray;
 
-/**manager */
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
 
 @end
 
 @implementation ChannelClubTableViewController
 
 static NSString * const movieCellIdentifier = @"movieCellIdentifier";
-
-- (AFHTTPSessionManager *)manager {
-    
-    if (! _manager) {
-        _manager = [AFHTTPSessionManager manager];
-    }
-    return _manager;
-}
 
 - (NSMutableArray *)movieArray {
     
@@ -52,9 +41,6 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     return _movieArray;
 }
 
--(void)dealloc {
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,54 +83,58 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
 
 - (void) loadLatestMovies {
     
-    [SVProgressHUD show];
+    [self.tableView beginLoading];
     [self.tableView.mj_footer endRefreshing];
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"p"] = @1;
     params[@"cateid"] = self.channel.cateid;
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/post/getPostInCate" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostInCate" parameters:params success:^(id  _Nullable responseObject) {
         self.movieArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.tableView reloadData];
         self.page = 1;
         [self.tableView.mj_header endRefreshing];
-        [SVProgressHUD dismiss];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.tableView endLoading];
+        @weakify(self);
+        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadLatestMovies];
+        }];
+    } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
-        [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+        [self.tableView endLoading];
+        @weakify(self);
+        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadLatestMovies];
+        }];
     }];
 }
 
 - (void) loadMoreMovies {
     
     [self.tableView.mj_header endRefreshing];
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSInteger page = self.page + 1;
     params[@"p"] = @(page);
     params[@"cateid"] = self.channel.cateid;
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.movieArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];
         self.page = page;
         [self.tableView.mj_footer endRefreshing];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"网络不给力"];
     }];
 }
 
 - (void) backItemClick {
-    [SVProgressHUD dismiss];
+    [self.tableView endLoading];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -161,8 +151,6 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:movieCellIdentifier];
-    
-    
     
     return cell;
 }

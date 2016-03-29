@@ -7,7 +7,6 @@
 //
 
 #import "ArticlesTableViewController.h"
-#import <AFNetworking/AFNetworking.h>
 #import <MJExtension/MJExtension.h>
 #import <MJRefresh/MJRefresh.h>
 #import "Movie.h"
@@ -15,9 +14,6 @@
 #import "ArticleWebViewController.h"
 
 @interface ArticlesTableViewController ()
-
-/**网络管理 */
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
 
 /**数据 */
 @property (nonatomic, strong) NSMutableArray *articleArray;
@@ -31,12 +27,7 @@
 
 static NSString * const reuseIdentifier = @"ArticleCell";
 
-- (AFHTTPSessionManager *)manager {
-    if (!_manager) {
-        _manager = [AFHTTPSessionManager manager];
-    }
-    return _manager;
-}
+
 
 - (NSMutableArray *)articleArray {
     if (!_articleArray) {
@@ -79,51 +70,56 @@ static NSString * const reuseIdentifier = @"ArticleCell";
 
 - (void) loadMoreArticles {
     [self.tableView.mj_header endRefreshing];
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSInteger page = self.page + 1;
     params[@"p"] = @(page);
     params[@"cateid"] = @(self.type);
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.articleArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];
         self.page = page;
         [self.tableView.mj_footer endRefreshing];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"网络不给力"];
     }];
+    
 }
 
 - (void) loadNewArticles {
     
     [self.tableView.mj_footer endRefreshing];
-    [SVProgressHUD show];
-     [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
+    [self.tableView beginLoading];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"cateid"] = @(self.type);
     params[@"p"] = @1;
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params success:^(id  _Nullable responseObject) {
         
         self.articleArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
         [self.tableView reloadData];
-        
-        [SVProgressHUD dismiss];
-        
+        [self.tableView endLoading];
         [self.tableView.mj_header endRefreshing];
-        
         self.page = 1;
-    
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        @weakify(self);
+        [self.view configWithData:self.articleArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadNewArticles];
+        }];
+        
+    } failure:^(NSError * _Nonnull error) {
+        
         [self.tableView.mj_header endRefreshing];
-        [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+        [self.tableView endLoading];
+        @weakify(self);
+        [self.view configWithData:self.articleArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadNewArticles];
+        }];
     }];
 }
 
@@ -149,10 +145,6 @@ static NSString * const reuseIdentifier = @"ArticleCell";
     ArticleWebViewController *articleVc = [[ArticleWebViewController alloc] init];
     articleVc.movie = self.articleArray[indexPath.row];
     [self.navigationController pushViewController:articleVc animated:YES];
-}
-
-- (void)dealloc {
-     [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
 }
 
 

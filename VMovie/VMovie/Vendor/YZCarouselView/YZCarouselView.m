@@ -56,10 +56,10 @@ static NSString * const reuseIdentifier = @"CarouselCell";
 
 - (void) setupPageControl {
     
-//    if (self.pageControl) {
-//        [self.pageControl removeFromSuperview];
-//    }
-//    
+    if (self.pageControl) {
+        [self.pageControl removeFromSuperview];
+    }
+//
 //    if (self.imageArray.count <= 1) {
 //        return;
 //    }

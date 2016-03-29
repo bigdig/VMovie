@@ -86,7 +86,6 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/AFNetworking.framework"
   install_framework "Pods/HCSStarRatingView.framework"
-  install_framework "Pods/HYBNetworking.framework"
   install_framework "Pods/MJExtension.framework"
   install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/Masonry.framework"
@@ -94,13 +93,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Result.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SVProgressHUD.framework"
-  install_framework "Pods/WebViewJavascriptBridge.framework"
   install_framework "Pods/XXNibBridge.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AFNetworking.framework"
   install_framework "Pods/HCSStarRatingView.framework"
-  install_framework "Pods/HYBNetworking.framework"
   install_framework "Pods/MJExtension.framework"
   install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/Masonry.framework"
@@ -108,6 +105,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Result.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SVProgressHUD.framework"
-  install_framework "Pods/WebViewJavascriptBridge.framework"
   install_framework "Pods/XXNibBridge.framework"
 fi

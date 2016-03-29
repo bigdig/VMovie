@@ -14,6 +14,8 @@
 #import "Movie.h"
 #import "SearchMovieCell.h"
 #import "MoviePlayerViewController.h"
+#import "NSArray+Categoty.h"
+#import "UITableView+Extension.h"
 
 @interface SearchMovieViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -80,7 +82,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 
 //控制器销毁时取消网络请求
 -(void)dealloc {
-    [SVProgressHUD dismiss];
+    [self.tableView endLoading];
     [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
 }
 
@@ -99,11 +101,13 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
     
     UITableViewCell *cell = nil;
     if (!self.showHistory) {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         cell = [tableView dequeueReusableCellWithIdentifier:MovieIdentifier];
     } else {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         cell = [tableView dequeueReusableCellWithIdentifier:HistoryIdentifier];
+        
     }
-    
     return cell;
 }
 
@@ -159,7 +163,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
     //将要搜索的文字加入搜索历史
     if (textField.text.length > 0 ) {
         [self.historyies insertObject:textField.text atIndex:0];
-        
+        self.historyies = [self.historyies deleteRepetitionElements];
         if (self.historyies.count > 5) {
             [self.historyies removeLastObject];
         }
@@ -261,7 +265,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 - (void) loadSearchResultMovies{
     
     [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
-    [SVProgressHUD show];
+    [self.tableView beginLoading];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"kw"] = self.searchText;
@@ -282,13 +286,25 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
         
         self.page  = 1;
         
-        [SVProgressHUD dismiss];
+        [self.tableView endLoading];
+        
+//        @weakify(self);
+//        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+//            @strongify(self);
+//            [self loadSearchResultMovies];
+//        }];
         
         [self updatefooterState];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+        [self.tableView endLoading];
+        
+        @weakify(self);
+        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+            @strongify(self);
+            [self loadSearchResultMovies];
+        }];
     }];
     
 }
@@ -314,7 +330,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.tableView.mj_footer endRefreshing];
-        [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+        [SVProgressHUD showErrorWithStatus:@"网络好像出问题了哟('_')"];
     }];
 }
 
@@ -424,6 +440,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
     _showHistory = showHistory;
     [self.tableView reloadData];
     if (showHistory) {
+        [self.tableView endLoading];
         self.tableView.tableFooterView = self.footerView;
         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, 0.1)];
     } else {
