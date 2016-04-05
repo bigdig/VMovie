@@ -15,7 +15,7 @@
     if (self) {
         _pageIndicatorTintColor = [UIColor grayColor];
         _currentPageIndicatorTintColor = [UIColor blackColor];
-        _pageSpace = 10;//默认的点的空隙
+        _pageSpace = 6;//默认的点的空隙
         _currentPage = 0;
     }
     return self;
@@ -26,15 +26,20 @@
 {
     if (_numberOfPages != numberOfPages) {
         _numberOfPages = numberOfPages;
+        
+        for (UIView *subView in self.subviews){
+            [subView removeFromSuperview];
+        }
 
         //1.获取当前对象的宽高
-        CGFloat myWidth = self.frame.size.width;
+//        CGFloat myWidth = self.frame.size.width;
         CGFloat myHeight = self.frame.size.height;
-        CGFloat pointWidth = ( myWidth -  (_numberOfPages - 1) * _pageSpace) / _numberOfPages;
+//        CGFloat pointWidth = ( myWidth -  (_numberOfPages - 1) * _pageSpace) / _numberOfPages;
+        CGFloat pointWidth = 20;
         //2.循环创建图片,添加到self上
         for (NSInteger i = 0; i < _numberOfPages; i++) {
             //每个小点
-            UIView *pointView = [[UIImageView alloc]initWithFrame:CGRectMake((_pageSpace + pointWidth) * i, 0, pointWidth, myHeight)];
+            UIView *pointView = [[UIImageView alloc]initWithFrame:CGRectMake((_pageSpace + pointWidth) * i +( self.width - ((pointWidth + _pageSpace) * _numberOfPages - _pageSpace)) * 0.5, 0, pointWidth,myHeight)];
             pointView.layer.cornerRadius = myHeight * 0.5;
             pointView.backgroundColor = _pageIndicatorTintColor;
             [self addSubview:pointView];

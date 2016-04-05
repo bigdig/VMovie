@@ -49,7 +49,7 @@
     // 返回按钮事件
     __weak typeof(self) weakSelf = self;
     self.playerView.goBackBlock = ^{
-        [SVProgressHUD dismiss];
+        NSLog(@"%s",__func__);
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
    
@@ -64,15 +64,17 @@
     
     self.webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
     self.webView.backgroundColor = [UIColor whiteColor];
-    NSString *urlString = [NSString stringWithFormat:@"http://app.vmoiver.com/%@?qingapp=app_new&debug=1",self.movie.postid];
-    NSURL *vURL = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:vURL];
-    [self.webView loadRequest:request];
     [self.view addSubview:self.webView];
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.equalTo(self.view);
         make.top.equalTo(self.playerView.mas_bottom);
     }];
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://app.vmoiver.com/%@?qingapp=app_new&debug=1",self.movie.postid];
+    NSURL *vURL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:vURL];
+    [self.webView loadRequest:request];
+    [self.view beginLoading];
     
     self.webView.UIDelegate = self;
     
@@ -108,23 +110,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].statusBarHidden = NO;
     self.navigationController.navigationBarHidden = YES;
-
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [UIApplication sharedApplication].statusBarHidden = NO;
+    [self.view endLoading];
     self.navigationController.navigationBarHidden = NO;
 
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 // 哪些页面支持自动转屏
 - (BOOL)shouldAutorotate{
@@ -161,7 +157,7 @@
     }
     
     if (!self.webView.loading) {
-        
+        [self.view endLoading];
         [self.webView evaluateJavaScript:  @"var links = document.getElementsByClassName('new-view-link');"
          " for(var i=0;i<links.length;i++){"
          "var link = links[i];"
@@ -181,8 +177,10 @@
 
 #pragma mark - WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    
     if ([message.name isEqualToString:@"VMovie"]) {
+        if ([message.body[@"viewType"] integerValue] != 0) {
+            return;
+        }
         Movie *movie = [[Movie alloc] init];
         movie.postid = message.body[@"viewId"];
         MoviePlayerViewController *moviePlayerVc = [[MoviePlayerViewController alloc] init];

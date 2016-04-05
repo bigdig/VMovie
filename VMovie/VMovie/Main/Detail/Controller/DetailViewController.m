@@ -12,6 +12,7 @@
 #import "MovieChannelCollectionViewController.h"
 #import "VMNavigationController.h"
 #import "BackStageViewController.h"
+#import "SeriesTableViewController.h"
 
 @interface DetailViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -97,7 +98,7 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
     
     backButton.layer.cornerRadius = 30;
     backButton.transform = CGAffineTransformMakeScale(0.1, 0.1);
-    [UIView animateWithDuration:1.0 delay:0.0 usingSpringWithDamping:0.3 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         backButton.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
     }];
@@ -139,6 +140,11 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.backButton) {
+        [self.backButton removeFromSuperview];
+    }
+    
     if (indexPath.row == 0) { //点击首页
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -147,6 +153,14 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
         
         MovieChannelCollectionViewController *movieChannelVc = [[MovieChannelCollectionViewController alloc] init];
         VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:movieChannelVc];
+        vmNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:vmNav animated:YES completion:nil];
+    }
+    
+    if (indexPath.row == 2) { //点击系列
+        
+        SeriesTableViewController *seriesVc = [[SeriesTableViewController alloc] init];
+        VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:seriesVc];
         vmNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:vmNav animated:YES completion:nil];
     }

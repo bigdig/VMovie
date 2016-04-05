@@ -38,9 +38,7 @@ static NSString * const reuseIdentifier = @"CarouselCell";
         self.backgroundColor = [UIColor whiteColor];
         
         [self setupCollectionView];
-        
         [self setupPageControl];
-  
         [self setupTimer];
 
     }
@@ -59,10 +57,6 @@ static NSString * const reuseIdentifier = @"CarouselCell";
     if (self.pageControl) {
         [self.pageControl removeFromSuperview];
     }
-//
-//    if (self.imageArray.count <= 1) {
-//        return;
-//    }
     
     VMPageControl *pageControl = [[VMPageControl alloc] init];
     [self addSubview:pageControl];
@@ -70,9 +64,9 @@ static NSString * const reuseIdentifier = @"CarouselCell";
     pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     self.pageControl = pageControl;
     
-    self.pageControl.width = 150;
+    self.pageControl.width = self.width;
     self.pageControl.height = 4;
-    self.pageControl.x = (self.width - self.pageControl.width) * 0.5;
+    self.pageControl.centerX = self.centerX;
     self.pageControl.y = self.height - self.pageControl.height - 8;
 }
 
@@ -157,7 +151,7 @@ static NSString * const reuseIdentifier = @"CarouselCell";
     
     _imageArray = imageArray;
     self.totalItems = self.imageArray.count * 100;
-    
+//    [self setupPageControl];
     self.pageControl.numberOfPages = imageArray.count;
     [self.collectionView reloadData];
    

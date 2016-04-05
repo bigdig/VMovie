@@ -168,4 +168,18 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     [self.navigationController pushViewController:moviePlayerVc animated:YES];
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
 @end

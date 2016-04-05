@@ -63,10 +63,12 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
     [super viewWillAppear:animated];
       self.navigationController.navigationBarHidden = YES;
     self.historyies = [NSMutableArray arrayWithContentsOfFile:[PATH_OF_DOCUMENT stringByAppendingPathComponent:@"SearchHistory.plist"]];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 //视图初始化
@@ -127,7 +129,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
     if (!self.showHistory) {
         return ScaleFrom_iPhone5_Desgin(100);
     } else {
-        return ScaleFrom_iPhone5_Desgin(40);
+        return ScaleFrom_iPhone5_Desgin(44);
     }
 }
 
