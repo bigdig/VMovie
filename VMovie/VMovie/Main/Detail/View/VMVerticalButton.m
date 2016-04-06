@@ -54,7 +54,7 @@
     self.imageView.centerX = self.width * 0.5;
     
     self.titleLabel.x = 0;
-    self.titleLabel.y = CGRectGetMaxY(self.imageView.frame);
+    self.titleLabel.y = CGRectGetMaxY(self.imageView.frame) - 10;
     self.titleLabel.width = self.width;
     self.titleLabel.height = self.height - self.titleLabel.y;
     

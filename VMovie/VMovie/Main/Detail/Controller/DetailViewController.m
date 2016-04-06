@@ -13,6 +13,10 @@
 #import "VMNavigationController.h"
 #import "BackStageViewController.h"
 #import "SeriesTableViewController.h"
+#import "MarkTableViewController.h"
+#import "DownTableViewController.h"
+#import "LikeTableViewController.h"
+#import "LoginViewController.h"
 
 @interface DetailViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -60,7 +64,7 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
     }];
     
     UIImageView *bgView = [[UIImageView alloc] init];
-    bgView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
+    bgView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     bgView.contentMode = UIViewContentModeScaleAspectFill;
     bgView.image = [UIImage imageNamed:@"menu_top_bg"];
     [self.view addSubview:bgView];
@@ -80,7 +84,24 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
     
     [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     
-    tableView.tableHeaderView = [DetailHeaderView headerView];
+    DetailHeaderView *headerView = [DetailHeaderView headerView];
+    @weakify(self);
+    headerView.LoginBlock = ^{
+        @strongify(self);
+        LoginViewController *loginVc = [[LoginViewController alloc] init];
+        loginVc.showDismissButton = YES;
+        [self presentViewController:loginVc animated:YES completion:nil];
+    };
+    headerView.MarkBlock = ^{
+        NSLog(@"点击了订阅");
+    };
+    headerView.DownBlock = ^{
+        
+    };
+    headerView.LikeBlock = ^{
+        
+    };
+    tableView.tableHeaderView = headerView;
 }
 
 - (void) setupBackButton {

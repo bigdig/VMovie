@@ -93,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Result.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SVProgressHUD.framework"
+  install_framework "Pods/TPKeyboardAvoiding.framework"
   install_framework "Pods/XXNibBridge.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -105,5 +106,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Result.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SVProgressHUD.framework"
+  install_framework "Pods/TPKeyboardAvoiding.framework"
   install_framework "Pods/XXNibBridge.framework"
 fi

@@ -12,4 +12,14 @@
 
 + (instancetype) headerView;
 
+/**点击订阅按钮 */
+@property (nonatomic, copy) void (^MarkBlock)();
+/**点击缓存按钮 */
+@property (nonatomic, copy) void (^DownBlock)();
+/**点击喜欢按钮 */
+@property (nonatomic, copy) void (^LikeBlock)();
+
+/**登录 */
+@property (nonatomic, copy) void (^LoginBlock)();
+
 @end

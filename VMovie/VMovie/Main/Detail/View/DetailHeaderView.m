@@ -25,10 +25,6 @@
         
         [self setupAvatarView];
         [self setupListView];
-        
-        
-        
-
     }
     return self;
 }
@@ -52,6 +48,9 @@
     [avatarButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     avatarButton.titleEdgeInsets = UIEdgeInsetsMake(avatarButton.currentImage.size.height + 10, -avatarButton.currentImage.size.width, 0, 0);
     avatarButton.imageEdgeInsets = UIEdgeInsetsMake(-avatarButton.titleLabel.height, 0, 0, 0);
+    [[avatarButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        !self.LoginBlock ? : self.LoginBlock();
+    }];
     [avatarView addSubview:avatarButton];
     [avatarButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(avatarView).offset(20);
@@ -92,6 +91,9 @@
     VMVerticalButton *markButton = [VMVerticalButton buttonWithType:UIButtonTypeCustom];
     [markButton setImage:[UIImage imageNamed:@"menu_mark_bg"] forState:UIControlStateNormal];
     [markButton setTitle:@"我的订阅" forState:UIControlStateNormal];
+    [[markButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        !self.MarkBlock ? : self.MarkBlock();
+    }];
     [listView addSubview:markButton];
     [markButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(listView);
@@ -102,6 +104,9 @@
     [downButton setImage:[UIImage imageNamed:@"menu_down_bg"] forState:UIControlStateNormal];
     [downButton setTitle:@"离线下载" forState:UIControlStateNormal];
     downButton.showMessage = YES;
+    [[downButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        !self.DownBlock ? : self.DownBlock();
+    }];
     [listView addSubview:downButton];
     [downButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(markButton.mas_right);
@@ -111,6 +116,9 @@
     VMVerticalButton *likeButton = [VMVerticalButton buttonWithType:UIButtonTypeCustom];
     [likeButton setImage:[UIImage imageNamed:@"menu_like_bg"] forState:UIControlStateNormal];
     [likeButton setTitle:@"我喜欢的" forState:UIControlStateNormal];
+    [[likeButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        !self.LikeBlock ? : self.LikeBlock();
+    }];
     [listView addSubview:likeButton];
     [likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(downButton.mas_right);
@@ -133,7 +141,7 @@
     [separator2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(downButton.mas_right);
         make.height.equalTo(@20);
-        make.width.equalTo(@1);
+        make.width.equalTo(@2);
         make.centerY.equalTo(markButton).offset(5);
     }];
 

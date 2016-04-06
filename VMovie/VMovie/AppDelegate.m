@@ -13,6 +13,7 @@
 #import "VMNavigationController.h"
 #import "DetailViewController.h"
 #import "BackStageViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
