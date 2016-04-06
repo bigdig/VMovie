@@ -7,7 +7,7 @@
 //
 
 #import "UITableView+Extension.h"
-#import "UIColor+Expand.h"
+#import "UIColor+expanded.h"
 
 @implementation UITableView (Extension)
 

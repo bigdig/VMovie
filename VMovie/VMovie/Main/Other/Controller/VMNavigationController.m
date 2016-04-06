@@ -36,11 +36,11 @@
 
 - (BOOL)shouldAutorotate
 {
-    return [self.visibleViewController shouldAutorotate];
+    return [self.topViewController shouldAutorotate];
 }
 
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return [self.visibleViewController supportedInterfaceOrientations];
+    return [self.topViewController supportedInterfaceOrientations];
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation

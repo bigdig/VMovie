@@ -14,6 +14,7 @@
 #import "DetailViewController.h"
 #import "BackStageViewController.h"
 #import "LoginViewController.h"
+#import "SettingTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -34,7 +35,7 @@
     
     if ([currentVersion isEqualToString:sandboxVersion]) {
         VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
-//        VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[BackStageViewController alloc] init]];
+//        VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:[[SettingTableViewController alloc] init]];
         self.window.rootViewController = vmNav;
     } else {
         self.window.rootViewController = [[NewFeatureViewController alloc] init];

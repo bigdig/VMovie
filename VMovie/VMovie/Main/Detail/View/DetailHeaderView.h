@@ -18,8 +18,11 @@
 @property (nonatomic, copy) void (^DownBlock)();
 /**点击喜欢按钮 */
 @property (nonatomic, copy) void (^LikeBlock)();
-
 /**登录 */
 @property (nonatomic, copy) void (^LoginBlock)();
+/**设置 */
+@property (nonatomic, copy) void (^SettingBlock)();
+/**消息 */
+@property (nonatomic, copy) void (^MessageBlock)();
 
 @end

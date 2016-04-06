@@ -30,7 +30,7 @@
                 make.height.mas_equalTo(20);
                 make.left.equalTo(self.contentView).offset(App_Frame_Width / 5);
                 make.right.equalTo(self.contentView).offset(-App_Frame_Width / 5);
-                make.centerY.equalTo(self.contentView);
+                make.centerY.equalTo(self.contentView).offset(10);
             }];
 
         }

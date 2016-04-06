@@ -8,6 +8,7 @@
 
 #import "DetailHeaderView.h"
 #import "VMVerticalButton.h"
+#import "UIImage+Category.h"
 
 @implementation DetailHeaderView
 
@@ -40,9 +41,9 @@
     
     UIButton *avatarButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //    avatarButton.backgroundColor = RANDOM_UICOLOR;
-    [avatarButton setImage:[UIImage imageNamed:@"menu_avatar_default"] forState:UIControlStateNormal];
-    [avatarButton setImage:[UIImage imageNamed:@"menu_avatar_default"] forState:UIControlStateHighlighted];
-    [avatarButton setTitle:@"点击登录" forState:UIControlStateNormal];
+    [avatarButton setImage:[[UIImage imageNamed:@"1"] circleImage] forState:UIControlStateNormal];
+    [avatarButton setImage:[[UIImage imageNamed:@"1"] circleImage] forState:UIControlStateHighlighted];
+    [avatarButton setTitle:@"醉梦旧人" forState:UIControlStateNormal];
     avatarButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     [avatarButton.titleLabel sizeToFit];
     [avatarButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -60,6 +61,9 @@
     
     UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [settingButton setBackgroundImage:[UIImage imageNamed:@"menu_setting_bg"] forState:UIControlStateNormal];
+    [[settingButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        !self.SettingBlock ? : self.SettingBlock();
+    }];
     [avatarView addSubview:settingButton];
     [settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@30);
@@ -67,10 +71,13 @@
         make.right.equalTo(avatarButton.mas_left).offset(-ScaleFrom_iPhone5_Desgin(30));
     }];
     
-    UIButton *voiceButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [voiceButton setBackgroundImage:[UIImage imageNamed:@"menu_setting_message"] forState:UIControlStateNormal];
-    [avatarView addSubview:voiceButton];
-    [voiceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [messageButton setBackgroundImage:[UIImage imageNamed:@"menu_setting_message"] forState:UIControlStateNormal];
+    [[messageButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        !self.MessageBlock ? : self.MessageBlock();
+    }];
+    [avatarView addSubview:messageButton];
+    [messageButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.centerY.equalTo(settingButton);
         make.left.equalTo(avatarButton.mas_right).offset(ScaleFrom_iPhone5_Desgin(30));
     }];

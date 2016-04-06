@@ -12,4 +12,6 @@
 
 + (instancetype)imageWithCaptureOfView:(UIView *)view;
 
+- (instancetype) circleImage;
+
 @end

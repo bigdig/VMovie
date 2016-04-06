@@ -23,4 +23,25 @@
     return image;
 }
 
+- (instancetype)circleImage {
+    
+    //设置透明度为0
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, [UIScreen mainScreen].scale);
+    //开启上下文
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    //画圆
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    CGContextAddEllipseInRect(ctx, rect);
+    //裁剪
+    CGContextClip(ctx);
+    //画图
+    [self drawInRect:rect];
+    //获取图片
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    //关闭上下文
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 @end

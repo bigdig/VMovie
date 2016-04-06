@@ -14,6 +14,7 @@
 #import "DetailViewController.h"
 #import "UIImage+Category.h"
 #import "YZTopWindow.h"
+#import "VMNavigationController.h"
 
 @interface HomeViewController () <UIScrollViewDelegate>
 
@@ -159,9 +160,10 @@
 
 - (void) detailItemClick {
     DetailViewController *detailVc = [[DetailViewController alloc] init];
+    VMNavigationController *vmNav = [[VMNavigationController alloc] initWithRootViewController:detailVc];
     detailVc.bgImage = [UIImage imageWithCaptureOfView:self.view];
     detailVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:detailVc animated:YES completion:nil];
+    [self presentViewController:vmNav animated:YES completion:nil];
 }
 
 - (void) searchItemClick {

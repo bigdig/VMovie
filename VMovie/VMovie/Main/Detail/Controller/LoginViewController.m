@@ -119,7 +119,7 @@ static NSString *const reuseIdentifier = @"LoginCell";
     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     loginButton.titleLabel.font = [UIFont systemFontOfSize:ScaleFrom_iPhone5_Desgin(15.0f)];
-    loginButton.backgroundColor = [UIColor blueColor];
+    loginButton.backgroundColor = RGBCOLOR(0, 182, 231);
     loginButton.height = 40;
     loginButton.layer.masksToBounds = YES;
     loginButton.layer.cornerRadius = loginButton.height/2;

@@ -17,6 +17,8 @@
 #import "DownTableViewController.h"
 #import "LikeTableViewController.h"
 #import "LoginViewController.h"
+#import "SettingTableViewController.h"
+#import "MessageTableViewController.h"
 
 @interface DetailViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -52,6 +54,16 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
     self.titles = @[@"首页",@"频道",@"系列",@"幕后"];
     self.images = @[@"side_home",@"side_channel",@"side_series",@"side_behind"];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void) setupSubViews {
@@ -91,6 +103,16 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
         LoginViewController *loginVc = [[LoginViewController alloc] init];
         loginVc.showDismissButton = YES;
         [self presentViewController:loginVc animated:YES completion:nil];
+    };
+    headerView.SettingBlock = ^{
+        @strongify(self);
+        SettingTableViewController *settingVc = [[SettingTableViewController alloc] init];
+        [self.navigationController pushViewController:settingVc animated:YES];
+    };
+    headerView.MessageBlock = ^{
+        @strongify(self);
+        MessageTableViewController *messageVc = [[MessageTableViewController alloc] init];
+        [self.navigationController pushViewController:messageVc animated:YES];
     };
     headerView.MarkBlock = ^{
         NSLog(@"点击了订阅");
