@@ -173,7 +173,7 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
         [self.view endLoading];
 
         @weakify(self);
-        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.movieArray.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadLatestMovies];
         }];
@@ -181,7 +181,7 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
         [self.tableView.mj_header endRefreshing];
         [self.view endLoading];
         @weakify(self);
-        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.movieArray.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadLatestMovies];
         }];

@@ -106,7 +106,7 @@ static NSString * const reuseIdentifier = @"ArticleCell";
         [self.tableView.mj_header endRefreshing];
         self.page = 1;
         @weakify(self);
-        [self.view configWithData:self.articleArray.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.articleArray.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadNewArticles];
         }];
@@ -116,7 +116,7 @@ static NSString * const reuseIdentifier = @"ArticleCell";
         [self.tableView.mj_header endRefreshing];
         [self.tableView endLoading];
         @weakify(self);
-        [self.view configWithData:self.articleArray.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.articleArray.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadNewArticles];
         }];

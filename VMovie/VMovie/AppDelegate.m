@@ -30,6 +30,8 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
     NSString *sandboxVersion = [UserDefaults stringForKey:@"AppVersion"];
     NSString *currentVersion = APP_VERSION;
     

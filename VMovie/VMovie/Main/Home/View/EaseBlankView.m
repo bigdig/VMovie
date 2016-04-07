@@ -28,7 +28,7 @@
     return self;
 }
 
-- (void) configWithData:(BOOL) hasData  reloadDataBlock:(void(^)(id)) block {
+- (void) configWithText:(NSString *)text hasData:(BOOL)hasData hasError:(BOOL)hasError reloadDataBlock:(void(^)(id)) block {
     
     
     if (hasData) {
@@ -40,38 +40,40 @@
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.backgroundColor = [UIColor clearColor];
         _tipLabel.numberOfLines = 0;
-        _tipLabel.font = [UIFont systemFontOfSize:14.0f];
+        _tipLabel.font = [UIFont systemFontOfSize:15.0f];
         _tipLabel.textColor = [UIColor lightGrayColor];
         _tipLabel.textAlignment = NSTextAlignmentCenter;
-        _tipLabel.text = @"加载失败";
+        _tipLabel.text = text;
         [self addSubview:_tipLabel];
     }
     
-    if (!_reloadButton) {
-        _reloadButton = [[UIButton alloc] init];
-        [_reloadButton setTitle:@"点击重试" forState:UIControlStateNormal];
-        _reloadButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-        [_reloadButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [_reloadButton addTarget:self action:@selector(reloadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_reloadButton sizeToFit];
-        _reloadButton.layer.masksToBounds = YES;
-        _reloadButton.layer.cornerRadius = _reloadButton.height/2;
-        _reloadButton.layer.borderWidth = 1.0;
-        _reloadButton.layer.borderColor = [UIColor blueColor].CGColor;
-        [self addSubview:_reloadButton];
-    }
-    //    布局
-    [_reloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.bottom.equalTo(self.mas_centerY);
-        make.width.equalTo(@120);
-    }];
     [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.centerX.equalTo(self);
-        make.bottom.equalTo(_reloadButton.mas_top);
-        make.height.mas_equalTo(50);
+        make.centerX.equalTo(self);
+        make.centerY.equalTo(self).offset(-50);
     }];
     
+    if (hasError) {
+        if (!_reloadButton) {
+            _reloadButton = [[UIButton alloc] init];
+            [_reloadButton setTitle:@"点击重试" forState:UIControlStateNormal];
+            _reloadButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+            [_reloadButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+            [_reloadButton addTarget:self action:@selector(reloadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            [_reloadButton sizeToFit];
+            _reloadButton.layer.masksToBounds = YES;
+            _reloadButton.layer.cornerRadius = _reloadButton.height/2;
+            _reloadButton.layer.borderWidth = 1.0;
+            _reloadButton.layer.borderColor = [UIColor blueColor].CGColor;
+            [self addSubview:_reloadButton];
+        }
+        //    布局
+        [_reloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.top.equalTo(_tipLabel.mas_bottom).offset(5);
+            make.width.equalTo(@120);
+        }];
+    }
+  
     _reloadButtonBlock = block;
 }
 

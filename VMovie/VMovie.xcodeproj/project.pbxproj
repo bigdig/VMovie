@@ -57,6 +57,7 @@
 		71AC01461CB4BC3B00B15B3B /* UIButton+Bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AC01451CB4BC3B00B15B3B /* UIButton+Bootstrap.m */; };
 		71AC01491CB4BC4500B15B3B /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AC01481CB4BC4500B15B3B /* UIColor+expanded.m */; };
 		71AC014C1CB4DC9C00B15B3B /* MessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AC014B1CB4DC9C00B15B3B /* MessageTableViewController.m */; };
+		71AC01521CB5EC0200B15B3B /* NSObject+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AC01511CB5EC0200B15B3B /* NSObject+Common.m */; };
 		71AD780B1CAA147F00D983A0 /* YZNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD780A1CAA147F00D983A0 /* YZNetworking.m */; };
 		71AD780E1CAA338200D983A0 /* NSArray+Categoty.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD780D1CAA338200D983A0 /* NSArray+Categoty.m */; };
 		71AD78111CAA367B00D983A0 /* UITableView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD78101CAA367B00D983A0 /* UITableView+Extension.m */; };
@@ -195,6 +196,8 @@
 		71AC01481CB4BC4500B15B3B /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
 		71AC014A1CB4DC9C00B15B3B /* MessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewController.h; sourceTree = "<group>"; };
 		71AC014B1CB4DC9C00B15B3B /* MessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewController.m; sourceTree = "<group>"; };
+		71AC01501CB5EC0200B15B3B /* NSObject+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Common.h"; sourceTree = "<group>"; };
+		71AC01511CB5EC0200B15B3B /* NSObject+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Common.m"; sourceTree = "<group>"; };
 		71AD78091CAA147F00D983A0 /* YZNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZNetworking.h; sourceTree = "<group>"; };
 		71AD780A1CAA147F00D983A0 /* YZNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZNetworking.m; sourceTree = "<group>"; };
 		71AD780C1CAA338200D983A0 /* NSArray+Categoty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Categoty.h"; sourceTree = "<group>"; };
@@ -640,6 +643,8 @@
 				71AD780D1CAA338200D983A0 /* NSArray+Categoty.m */,
 				71AD780F1CAA367B00D983A0 /* UITableView+Extension.h */,
 				71AD78101CAA367B00D983A0 /* UITableView+Extension.m */,
+				71AC01501CB5EC0200B15B3B /* NSObject+Common.h */,
+				71AC01511CB5EC0200B15B3B /* NSObject+Common.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -967,6 +972,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71811A161C990F1C0054D7CD /* VMAnimator.m in Sources */,
+				71AC01521CB5EC0200B15B3B /* NSObject+Common.m in Sources */,
 				7137ABE41C97AAD300030DBD /* MovieListTableViewController.m in Sources */,
 				71673A981C9A308C002581DE /* ChannelClubTableViewController.m in Sources */,
 				71D723A51CA503B7004B7FC5 /* EaseBlankView.m in Sources */,

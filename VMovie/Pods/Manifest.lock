@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - HCSStarRatingView (1.4.3)
   - Masonry (0.6.4)
+  - MBProgressHUD (0.9.2)
   - MJExtension (3.0.10)
   - MJRefresh (3.1.0)
   - ReactiveCocoa (4.0.1):
@@ -41,18 +42,20 @@ DEPENDENCIES:
   - AFNetworking
   - HCSStarRatingView
   - Masonry
+  - MBProgressHUD
   - MJExtension
   - MJRefresh
   - ReactiveCocoa
   - SDWebImage
   - SVProgressHUD
-  - TPKeyboardAvoiding
+  - TPKeyboardAvoiding (~> 1.2.11)
   - XXNibBridge
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   HCSStarRatingView: bada6ae98258c3019531e0218030e2d5ad10765a
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90

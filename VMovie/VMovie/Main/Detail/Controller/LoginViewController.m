@@ -9,8 +9,9 @@
 #import "LoginViewController.h"
 #import <TPKeyboardAvoiding/TPKeyboardAvoidingTableView.h>
 #import "LoginTextCell.h"
+#import "UIButton+Bootstrap.h"
 
-#define HEADERHEIGHT App_Frame_Height / 3
+#define HEADERHEIGHT App_Frame_Height * 0.4
 #define FOOTERHEIGHT App_Frame_Height * 4 / 9
 
 @interface LoginViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -115,14 +116,14 @@ static NSString *const reuseIdentifier = @"LoginCell";
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, App_Frame_Width, FOOTERHEIGHT)];
     
-    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [loginButton setTitle:@"登录" forState:UIControlStateNormal];
-    [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    loginButton.titleLabel.font = [UIFont systemFontOfSize:ScaleFrom_iPhone5_Desgin(15.0f)];
-    loginButton.backgroundColor = RGBCOLOR(0, 182, 231);
-    loginButton.height = 40;
-    loginButton.layer.masksToBounds = YES;
-    loginButton.layer.cornerRadius = loginButton.height/2;
+    UIButton *loginButton = [UIButton buttonWithStyle:StrapSuccessStyle andTitle:@"登录" andFrame:CGRectMake(0, 0, 120, ScaleFrom_iPhone5_Desgin(40)) target:nil action:nil];
+//    [loginButton setTitle:@"登录" forState:UIControlStateNormal];
+//    [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    loginButton.titleLabel.font = [UIFont systemFontOfSize:ScaleFrom_iPhone5_Desgin(15.0f)];
+//    loginButton.backgroundColor = RGBCOLOR(0, 182, 231);
+//    loginButton.height = 40;
+//    loginButton.layer.masksToBounds = YES;
+//    loginButton.layer.cornerRadius = loginButton.height/2;
 //    loginButton.layer.borderWidth = 1.0;
 //    loginButton.layer.borderColor = [UIColor greenColor].CGColor;
     [footerView addSubview:loginButton];

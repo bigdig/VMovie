@@ -13,7 +13,7 @@
 /**EaseBlankView */
 @property (nonatomic, strong) EaseBlankView *blankView;
 
-- (void) configWithData:(BOOL) hasData  reloadDataBlock:(void(^)(id)) block;
+- (void) configWithText:(NSString *)text hasData:(BOOL)hasData hasError:(BOOL)hasError reloadDataBlock:(void(^)(id)) block;
 
 @property (strong, nonatomic) EaseLoadingView *loadingView;
 - (void)beginLoading;

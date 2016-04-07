@@ -37,7 +37,7 @@ static NSString * const reuseIdentifier = @"SeriesCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor cyanColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self setupNav];
     [self setupRefresh];
@@ -95,7 +95,7 @@ static NSString * const reuseIdentifier = @"SeriesCell";
         [self.tableView.mj_header endRefreshing];
         self.page = 1;
         @weakify(self);
-        [self.view configWithData:self.seriesList.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.seriesList.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadLastetSeries];
         }];
@@ -105,7 +105,7 @@ static NSString * const reuseIdentifier = @"SeriesCell";
         [self.tableView.mj_header endRefreshing];
         [self.tableView endLoading];
         @weakify(self);
-        [self.view configWithData:self.seriesList.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.seriesList.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadLastetSeries];
         }];
@@ -150,6 +150,7 @@ static NSString * const reuseIdentifier = @"SeriesCell";
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    tableView.mj_footer.hidden = self.seriesList.count <= 0;
     return self.seriesList.count;
 }
 

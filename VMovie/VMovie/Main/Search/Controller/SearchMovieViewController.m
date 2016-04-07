@@ -303,7 +303,7 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
         [self.tableView endLoading];
         
         @weakify(self);
-        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.movieArray.count > 0 hasError:YES  reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadSearchResultMovies];
         }];

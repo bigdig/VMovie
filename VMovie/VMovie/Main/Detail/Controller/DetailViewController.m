@@ -97,31 +97,31 @@ static NSString *DetailListCellIdentifier = @"DetailListCellIdentifier";
     [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     
     DetailHeaderView *headerView = [DetailHeaderView headerView];
-    @weakify(self);
+    __weak typeof(self) weakSelf = self;
     headerView.LoginBlock = ^{
-        @strongify(self);
         LoginViewController *loginVc = [[LoginViewController alloc] init];
         loginVc.showDismissButton = YES;
-        [self presentViewController:loginVc animated:YES completion:nil];
+        [weakSelf presentViewController:loginVc animated:YES completion:nil];
     };
     headerView.SettingBlock = ^{
-        @strongify(self);
         SettingTableViewController *settingVc = [[SettingTableViewController alloc] init];
-        [self.navigationController pushViewController:settingVc animated:YES];
+        [weakSelf.navigationController pushViewController:settingVc animated:YES];
     };
     headerView.MessageBlock = ^{
-        @strongify(self);
         MessageTableViewController *messageVc = [[MessageTableViewController alloc] init];
-        [self.navigationController pushViewController:messageVc animated:YES];
+        [weakSelf.navigationController pushViewController:messageVc animated:YES];
     };
     headerView.MarkBlock = ^{
-        NSLog(@"点击了订阅");
+        MarkTableViewController *markVc = [[MarkTableViewController alloc] init];
+        [weakSelf.navigationController pushViewController:markVc animated:YES];
     };
     headerView.DownBlock = ^{
-        
+        DownTableViewController *downVc = [[DownTableViewController alloc] init];
+         [weakSelf.navigationController pushViewController:downVc animated:YES];
     };
     headerView.LikeBlock = ^{
-        
+        LikeTableViewController *likeVc = [[LikeTableViewController alloc] init];
+        [weakSelf.navigationController pushViewController:likeVc animated:YES];
     };
     tableView.tableHeaderView = headerView;
 }

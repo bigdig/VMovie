@@ -28,7 +28,7 @@ static char BlankViewKey,LoadingViewKey;
     return objc_getAssociatedObject(self, &BlankViewKey);
 }
 
-- (void)configWithData:(BOOL)hasData reloadDataBlock:(void (^)(id))block {
+- (void)configWithText:(NSString *)text hasData:(BOOL)hasData hasError:(BOOL)hasError reloadDataBlock:(void (^)(id))block {
     
     if (hasData) {
         if (self.blankView) {
@@ -42,7 +42,7 @@ static char BlankViewKey,LoadingViewKey;
         self.blankView.hidden = NO;
         [[self blankContainer] addSubview:self.blankView];
         
-        [self.blankView configWithData:hasData reloadDataBlock:block];
+        [self.blankView configWithText:(NSString *)text hasData:(BOOL)hasData hasError:(BOOL)hasError reloadDataBlock:block];
     }
 }
 

@@ -68,7 +68,7 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.collectionView endLoading];
         
         @weakify(self);
-        [self.view configWithData:self.channelArray.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.channelArray.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadChannels];
         }];
@@ -76,7 +76,7 @@ static NSString * const reuseIdentifier = @"Cell";
     } failure:^(NSError * _Nonnull error) {
         [self.collectionView endLoading];
         @weakify(self);
-        [self.view configWithData:self.channelArray.count > 0 reloadDataBlock:^(id sender) {
+        [self.view configWithText:@"加载失败" hasData:self.channelArray.count > 0 hasError:YES reloadDataBlock:^(id sender) {
             @strongify(self);
             [self loadChannels];
         }];

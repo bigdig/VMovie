@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EaseBlankView : UIView
-- (void) configWithData:(BOOL) hasData  reloadDataBlock:(void(^)(id)) block;
+- (void) configWithText:(NSString *)text hasData:(BOOL)hasData hasError:(BOOL)hasError reloadDataBlock:(void(^)(id)) block;
 @end
