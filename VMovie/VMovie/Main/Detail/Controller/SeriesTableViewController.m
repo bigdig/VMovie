@@ -87,7 +87,7 @@ static NSString * const reuseIdentifier = @"SeriesCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"p"] = @1;
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/series/getList" parameters:params success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/series/getList" parameters:params success:^(id  _Nullable responseObject) {
         
         self.seriesList = [Series mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.tableView reloadData];
@@ -119,7 +119,7 @@ static NSString * const reuseIdentifier = @"SeriesCell";
     NSInteger page = self.page + 1;
     params[@"p"] = @(page);
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/series/getList" parameters:params success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/series/getList" parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Series mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.seriesList addObjectsFromArray:dataArray];
         [self.tableView reloadData];

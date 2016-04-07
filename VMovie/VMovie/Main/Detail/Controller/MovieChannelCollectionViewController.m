@@ -61,7 +61,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //    http://app.vmoiver.com/apiv3/cate/getList?
     
     [self.collectionView beginLoading];
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/cate/getList?" parameters:nil success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/cate/getList?" parameters:nil success:^(id  _Nullable responseObject) {
         
         self.channelArray = [Channel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.collectionView reloadData];

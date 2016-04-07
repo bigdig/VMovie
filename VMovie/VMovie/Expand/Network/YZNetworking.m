@@ -14,7 +14,16 @@
 
 @implementation YZNetworking
 
-+(void)GET:(NSString *)URLString parameters:(id)parameters success:(successBlock)success failure:(failureBlock)failure {
++ (instancetype)sharedManager {
+    static id sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[self alloc] init];
+    });
+    return sharedManager;
+}
+
+- (void)GET:(NSString *)URLString parameters:(id)parameters success:(successBlock)success failure:(failureBlock)failure {
     
     //如果URL为空,直接返回
     if (!URLString || URLString.length <= 0) return;
@@ -27,9 +36,9 @@
         success(responseData);
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    [manager GET:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self GET:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if (success) {
             success(responseObject);
@@ -47,7 +56,7 @@
 }
 
 //缓存请求返回数据
-+(BOOL)saveResponseData:(NSDictionary *)responseData WithURL:(NSString *)urlPath Parameters:(NSDictionary *)parameters{
+- (BOOL)saveResponseData:(NSDictionary *)responseData WithURL:(NSString *)urlPath Parameters:(NSDictionary *)parameters{
     NSMutableString *localPath = [urlPath mutableCopy];
     if (parameters) {
         [localPath appendString:parameters.description];
@@ -61,7 +70,7 @@
 }
 
 //根据url和参数取出缓存数据
-+(id)loadResponseDataWithURL:(NSString *)urlPath Parameters:(NSDictionary *)parameters {
+- (id)loadResponseDataWithURL:(NSString *)urlPath Parameters:(NSDictionary *)parameters {
     
     //所有 Get 请求，增加缓存机制
     NSMutableString *localPath = [urlPath mutableCopy];
@@ -75,7 +84,7 @@
 }
 
 //获取cache的地址
-+(NSString* )pathInCacheDirectory:(NSString *)fileName
+- (NSString* )pathInCacheDirectory:(NSString *)fileName
 {
     NSArray *cachePaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [cachePaths objectAtIndex:0];
@@ -83,7 +92,7 @@
 }
 
 //创建缓存文件夹
-+(BOOL)createDirInCache:(NSString *)dirName
+- (BOOL)createDirInCache:(NSString *)dirName
 {
     NSString *dirPath = [self pathInCacheDirectory:dirName];
     BOOL isDir = NO;
@@ -101,7 +110,7 @@
 }
 
 //删除指定url和参数的缓存数据
-+ (BOOL)deleteResponseCacheWithURL:(NSString *)urlPath Parameters:(NSDictionary *)parameters{
+- (BOOL)deleteResponseCacheWithURL:(NSString *)urlPath Parameters:(NSDictionary *)parameters{
    
     NSMutableString *localPath = [urlPath mutableCopy];
     if (parameters) {
@@ -118,12 +127,12 @@
 }
 
 //删除缓存数据
-+ (BOOL) deleteResponseCache{
+- (BOOL) deleteResponseCache{
     return [self deleteCacheWithPath:kCACHEPATH];
 }
 
 //通过缓存路径删除缓存数据
-+ (BOOL) deleteCacheWithPath:(NSString *)cachePath{
+- (BOOL) deleteCacheWithPath:(NSString *)cachePath{
     NSString *dirPath = [self pathInCacheDirectory:cachePath];
     BOOL isDir = NO;
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -137,7 +146,7 @@
 }
 
 //获取md5字符串
-+(NSString *)md5StrOfString:(NSString *)string{
+- (NSString *)md5StrOfString:(NSString *)string{
     const char *cStr = [string UTF8String];
     unsigned char result[16];
     CC_MD5(cStr, (CC_LONG)strlen(cStr), result); // This is the md5 call

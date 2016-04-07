@@ -90,7 +90,7 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     params[@"p"] = @1;
     params[@"cateid"] = self.channel.cateid;
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostInCate" parameters:params success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/post/getPostInCate" parameters:params success:^(id  _Nullable responseObject) {
         self.movieArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.tableView reloadData];
         self.page = 1;
@@ -121,7 +121,7 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     params[@"p"] = @(page);
     params[@"cateid"] = self.channel.cateid;
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.movieArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];

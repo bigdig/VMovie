@@ -27,8 +27,6 @@
 @property (nonatomic, weak) UIButton *clearButton;
 /**微电影数据 */
 @property (nonatomic, strong) NSMutableArray *movieArray;
-/**网络管理 */
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
 /**页数 */
 @property (nonatomic, assign) NSInteger page;
 
@@ -85,7 +83,6 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 //控制器销毁时取消网络请求
 -(void)dealloc {
     [self.tableView endLoading];
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
 }
 
 #pragma mark - Delegate 视图委托
@@ -158,9 +155,6 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
     
     //搜索时将tableview滚动到顶部
     [self.tableView setContentOffset:CGPointZero animated:YES];
-    
-    //取消上次请求
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
     
     //将要搜索的文字加入搜索历史
     if (textField.text.length > 0 ) {
@@ -266,15 +260,13 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 //发送请求加载首页
 - (void) loadSearchResultMovies{
     
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
     [self.tableView beginLoading];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"kw"] = self.searchText;
     params[@"p"] = @1;
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/search" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/search"  parameters:params success:^(id  _Nullable responseObject) {
         self.movieArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         NSNumber *total = responseObject[@"total"];
         self.total = total.integerValue;
@@ -290,16 +282,9 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
         
         [self.tableView endLoading];
         
-//        @weakify(self);
-//        [self.view configWithData:self.movieArray.count > 0 reloadDataBlock:^(id sender) {
-//            @strongify(self);
-//            [self loadSearchResultMovies];
-//        }];
-        
         [self updatefooterState];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+
+    } failure:^(NSError * _Nonnull error) {
         [self.tableView endLoading];
         
         @weakify(self);
@@ -314,23 +299,19 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 //加载更多数据
 - (void) loadMoreMovies {
     
-    [self.manager.dataTasks makeObjectsPerformSelector:@selector(cancel)];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSInteger page = self.page + 1;
     params[@"p"] = @(page);
     params[@"kw"] = self.searchText;
     
-    [self.manager GET:@"http://app.vmoiver.com/apiv3/search" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/search"  parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         [self.movieArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];
         self.page = page;
         [self updatefooterState];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSError * _Nonnull error) {
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"网络好像出问题了哟('_')"];
     }];
@@ -347,14 +328,6 @@ static NSString *MovieIdentifier = @"MovieIdentifier";
 }
 
 #pragma mark - getters and setters 属性
-
-//网络管理者
-- (AFHTTPSessionManager *)manager {
-    if (!_manager) {
-        _manager = [AFHTTPSessionManager manager];
-    }
-    return _manager;
-}
 
 //微电影数据
 - (NSMutableArray *)movieArray {

@@ -17,7 +17,7 @@
     NSInteger minute = durationTime / 60;
     NSInteger second = durationTime % 60;
    
-    return  [NSString stringWithFormat:@"%02ld:%02ld",(long)minute,second];
+    return  [NSString stringWithFormat:@"%02ld:%02ld",(long)minute,(long)second];
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  ZFPlayerMaskView.h
+//  ZFDownloadSessionTask.h
 //
 // Copyright (c) 2016年 任子丰 ( http://github.com/renzifeng )
 //
@@ -21,27 +21,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
-
-@interface ZFPlayerMaskView : UIView
-
-/** 开始播放按钮 */
-@property (weak, nonatomic) IBOutlet UIButton       *startBtn;
-/** 当前播放时长label */
-@property (weak, nonatomic) IBOutlet UILabel        *currentTimeLabel;
-/** 视频总时长label */
-@property (weak, nonatomic) IBOutlet UILabel        *totalTimeLabel;
-/** 缓冲进度条 */
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
-/** 滑杆 */
-@property (weak, nonatomic) IBOutlet UISlider       *videoSlider;
-/** 全屏按钮 */
-@property (weak, nonatomic) IBOutlet UIButton       *fullScreenBtn;
-@property (weak, nonatomic) IBOutlet UIButton       *lockBtn;
+#import "ZFDownloadOperation.h"
 
 /**
- *  类方法创建
+ * 说明: ZFDownloadSessionTask  单个后台下载任务类
  */
-+ (instancetype)setupPlayerMaskView;
 
+@interface ZFDownloadSessionTask : ZFDownloadOperation
+
+/**
+ * 当前后台下载任务对象
+ */
+@property (nonatomic , strong)NSURLSessionDownloadTask * downloadTask;
+
+/**
+ * 函数说明: 取消当前下载任务
+ * @param: isDelete 取消下载任务的同时是否删除下载缓存的文件
+ */
+
+- (void)cancelDownloadTaskAndDeleteFile:(BOOL)isDelete;
+
+/**
+ * 函数说明: 处理下载应答
+ * @param: response 下载应答对象
+ */
+
+- (void)handleResponse:(NSURLResponse *)response;
 @end

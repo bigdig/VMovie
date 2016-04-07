@@ -20,21 +20,27 @@
 @interface MovieListTableViewController ()
 /**微电影数据 */
 @property (nonatomic, strong) NSMutableArray *movieArray;
-
 /**页数 */
 @property (nonatomic, assign) NSInteger page;
-
 /**广告数据 */
 @property (nonatomic, strong) NSMutableArray *bannerArray;
-
-
 /** 广告视图 */
 @property (nonatomic, weak) YZCarouselView *carouselView;
+
+/**manager */
+@property (nonatomic, strong) AFHTTPSessionManager *manager;
 @end
 
 @implementation MovieListTableViewController
 
 static NSString * const movieCellIdentifier = @"movieCellIdentifier";
+
+- (AFHTTPSessionManager *)manager {
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+    }
+    return _manager;
+}
 
 - (NSMutableArray *)bannerArray {
     
@@ -109,8 +115,8 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
 
 //网络请求加载banner
 - (void) loadBanner{
-    
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/index/getBanner/?" parameters:nil success:^(id  _Nullable responseObject) {
+
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/index/getBanner/?" parameters:nil success:^(id  _Nullable responseObject) {
         self.bannerArray = [Banner mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         NSMutableArray *urlArray = [NSMutableArray array];
@@ -165,7 +171,8 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     params[@"p"] = @1;
     params[@"tab"] = self.vTitle;
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
+  
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
         self.movieArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.tableView reloadData];
         self.page = 1;
@@ -186,8 +193,6 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
             [self loadLatestMovies];
         }];
     }];
-    
-
 }
 
 //上拉加载更多数据
@@ -200,7 +205,7 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     params[@"p"] = @(page);
     params[@"tab"] = self.vTitle;
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/post/getPostByTab" parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.movieArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];

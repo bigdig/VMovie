@@ -36,7 +36,7 @@
         make.height.equalTo(@20);
     }];
     
-    self.playerView = [ZFPlayerView setupZFPlayer];
+    self.playerView = [ZFPlayerView sharedPlayerView];
     [self.view addSubview:self.playerView];
     [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -93,11 +93,9 @@
 
 - (void) getMovieURL {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"postid"] = self.movie.postid;
-    [manager GET:@"http://app.vmoiver.com/apiv3/post/view" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/post/view" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString  *urlString = [responseObject[@"data"][@"content"][@"video"] firstObject][@"qiniu_url"];
         self.playerView.videoURL = [NSURL URLWithString:urlString];
@@ -110,6 +108,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.playerView resetPlayer];
     self.navigationController.navigationBarHidden = YES;
 }
 

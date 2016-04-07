@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AFNetworking.h"
 
 typedef void (^successBlock)(id _Nullable responseObject);
 typedef void (^failureBlock)(NSError * _Nonnull error);
 
-@interface YZNetworking : NSObject
+@interface YZNetworking : AFHTTPSessionManager
 
-+ (void)GET:(NSString * _Nonnull)URLString parameters:(id _Nullable)parameters success:(_Nullable successBlock)success failure:(_Nullable failureBlock)failure;
++ (_Nonnull instancetype)sharedManager;
+
+- (void)GET:(NSString * _Nonnull)URLString parameters:(id _Nullable)parameters success:(_Nullable successBlock)success failure:(_Nullable failureBlock)failure;
 
 @end

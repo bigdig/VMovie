@@ -76,7 +76,7 @@ static NSString * const reuseIdentifier = @"ArticleCell";
     params[@"p"] = @(page);
     params[@"cateid"] = @(self.type);
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params success:^(id  _Nullable responseObject) {
         NSArray *dataArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.articleArray addObjectsFromArray:dataArray];
         [self.tableView reloadData];
@@ -98,7 +98,7 @@ static NSString * const reuseIdentifier = @"ArticleCell";
     params[@"cateid"] = @(self.type);
     params[@"p"] = @1;
     
-    [YZNetworking GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params success:^(id  _Nullable responseObject) {
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/backstage/getPostByCate" parameters:params success:^(id  _Nullable responseObject) {
         
         self.articleArray = [Movie mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.tableView reloadData];
