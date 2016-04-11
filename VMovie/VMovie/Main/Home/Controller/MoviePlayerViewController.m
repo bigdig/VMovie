@@ -20,7 +20,7 @@
 #define SCREEN_ASPECTRATIO [UIScreen mainScreen].bounds.size.width/[UIScreen mainScreen].bounds.size.height
 #define PLAYERVIEW_HEIGHT ([UIScreen mainScreen].bounds.size.width * SCREEN_ASPECTRATIO)
 
-@interface MoviePlayerViewController ()<WKScriptMessageHandler,WKUIDelegate,UIScrollViewDelegate,UITableViewDelegate>
+@interface MoviePlayerViewController ()<WKScriptMessageHandler,WKUIDelegate,UIScrollViewDelegate>
 /**webView */
 @property (nonatomic, strong) WKWebView *webView;
 /**进度条 */
@@ -37,7 +37,6 @@
 /**显示评论 */
 @property (nonatomic, assign) BOOL showComment;
 
-
 @end
 
 @implementation MoviePlayerViewController
@@ -47,15 +46,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
    
+    [self setupNav];
+    [self setupWebView];
+    [self setupComment];
+}
+
+- (void)setupNav {
+    UIBarButtonItem *backItem = [UIBarButtonItem itemWithImage:@"img_player_back" HighImage:@"img_player_back" target:self action:@selector(backItemClick)];
+    self.navigationItem.leftBarButtonItem = backItem;
+    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithImage:@"img_player_share" HighImage:@"img_player_share" target:self action:@selector(shareItemClick)];
+    self.navigationItem.rightBarButtonItem = shareItem;
+    UIButton *titleButton = [UIButton new];
+    [titleButton setTitle:@"立即播放" forState:UIControlStateNormal];
+    [titleButton setImage:[UIImage imageNamed:@"img_details_play"] forState:UIControlStateNormal];
+    titleButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+    titleButton.width = 200;
+    titleButton.height = 44;
+    @weakify(self);
+    [[titleButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        @strongify(self);
+        if (self.playerView.isPlaying) {
+            [self.playerView pause];
+        } else {
+            [self.playerView play];
+            [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.view).offset(PLAYERVIEW_HEIGHT);
+            }];
+        }
+        [self scrollViewDidScroll:self.webView.scrollView];
+    }];
+    self.navigationItem.titleView = titleButton;
+    
+
+}
+
+- (void) setupWebView {
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.preferences = [[WKPreferences alloc] init];
     config.preferences.minimumFontSize = 10;
     config.preferences.javaScriptEnabled = YES;
     config.preferences.javaScriptCanOpenWindowsAutomatically = NO;
-//    config.userContentController = [[WKUserContentController alloc] init];
-//    [config.userContentController addScriptMessageHandler:self name:@"VMovie"];
+    //    config.userContentController = [[WKUserContentController alloc] init];
+    //    [config.userContentController addScriptMessageHandler:self name:@"VMovie"];
     WKUserContentController *userContentController = [[WKUserContentController alloc] init];
     config.userContentController = userContentController;
     [userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:@"VMovie"];
@@ -80,13 +117,12 @@
     self.webView.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(PLAYERVIEW_HEIGHT, 0, 0, 0);
     
     self.playerView = [[YZMoviePlayerView alloc] init];
-    self.playerView.title = self.movie.title;
+    //    self.playerView.title = self.movie.title;
     [self.webView addSubview:self.playerView];
     [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.webView);
         make.height.equalTo(self.playerView.mas_width).multipliedBy(SCREEN_ASPECTRATIO);
     }];
-    self.playerView.videoUrl = @"";
     [self getMovieURL];
     [self.playerView play];
     
@@ -103,39 +139,7 @@
     [self.webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:nil];
     [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
-    
-    UIBarButtonItem *backItem = [UIBarButtonItem itemWithImage:@"img_player_back" HighImage:@"img_player_back" target:self action:@selector(backItemClick)];
-    self.navigationItem.leftBarButtonItem = backItem;
-    UIBarButtonItem *shareItem = [UIBarButtonItem itemWithImage:@"img_player_share" HighImage:@"img_player_share" target:self action:@selector(shareItemClick)];
-    self.navigationItem.rightBarButtonItem = shareItem;
-    UIButton *titleButton = [UIButton new];
-    [titleButton setTitle:@"立即播放" forState:UIControlStateNormal];
-    [titleButton setImage:[UIImage imageNamed:@"img_details_play"] forState:UIControlStateNormal];
-    titleButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    titleButton.width = 200;
-    titleButton.height = 44;
-    @weakify(self);
-    [[titleButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        @strongify(self);
-            if (self.playerView.isPlaying) {
-                [self.playerView pause];
-            } else {
-                [self.playerView play];
-                [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.view).offset(PLAYERVIEW_HEIGHT);
-                }];
-            }
-            [self scrollViewDidScroll:self.webView.scrollView];
-    }];
-    self.navigationItem.titleView = titleButton;
-    
-    //去掉黑线
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-
-    [self setupComment];
 }
 
 - (void) setupComment {
@@ -148,7 +152,9 @@
                 [weakself.toolBar.commentButton setTitle:commentCount  forState:UIControlStateNormal];
     };
     commentVc.ClickHeaderBlock = ^{
+        weakself.tableView.hidden = YES;
         [weakself.view endEditing:YES];
+        NSLog(@"%s",__func__);
     };
     commentVc.beginScrollBlock = ^{
        [weakself.view endEditing:YES];
@@ -233,34 +239,55 @@
 }
 
 - (void) backItemClick {
- 
+  
     [self.playerView resetPlayer];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) shareItemClick {
-    NSLog(@"%s",__func__);
+    NSString *shareString = self.playerView.title;
+    UIImage *shareImage = [UIImage imageNamed:@"1"];
+    NSURL *shareURL = self.webView.URL;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Do something...
+        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[shareString,shareImage,shareURL] applicationActivities:nil];
+        activityView.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self presentViewController:activityView animated:YES completion:nil];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+    });
 }
 
 - (void) getMovieURL {
     
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    params[@"postid"] = self.movie.postid;
-//    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/post/view"  parameters:params success:^(id  _Nullable responseObject) {
-//        NSString  *urlString = [responseObject[@"data"][@"content"][@"video"] firstObject][@"qiniu_url"];
-//        self.playerView.videoUrl = urlString;
-//         
-//    } failure:nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"postid"] = self.movie.postid;
+    [[YZNetworking sharedManager] GET:@"http://app.vmoiver.com/apiv3/post/view"  parameters:params success:^(id  _Nullable responseObject) {
+        NSString  *urlString = [responseObject[@"data"][@"content"][@"video"] firstObject][@"qiniu_url"];
+        self.playerView.videoUrl = urlString;
+         self.playerView.title = [responseObject[@"data"][@"content"][@"video"] firstObject][@"title"];
+    } failure:nil];
     
-    self.playerView.videoUrl = @"http://baobab.wdjcdn.com/1456665467509qingshu.mp4";
+//    self.playerView.videoUrl = @"http://baobab.wdjcdn.com/1456665467509qingshu.mp4";
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar yz_setBackgroundImage:[UIImage imageNamed:@"img_place_bg"] alpha:0.0];
-    [self.navigationController.navigationBar yz_setElementsAlpha:0.0];
+//      [self.navigationController.navigationBar yz_setBackgroundImage:[UIImage imageNamed:@"img_place_bg"] alpha:0.0];
+//    [self.navigationController.navigationBar yz_setElementsAlpha:0.0];
+    //去掉黑线
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+  
     [self scrollViewDidScroll:self.webView.scrollView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -278,12 +305,14 @@
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
         [self.navigationController.navigationBar yz_setBackgroundImage:[UIImage imageNamed:@"img_place_bg"] alpha:0.0];
         [self.navigationController.navigationBar yz_setElementsAlpha:0.0];
+        self.toolBar.hidden = NO;
 //        [self scrollViewDidScroll:self.webView.scrollView];
         
     }else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         self.view.backgroundColor = [UIColor blackColor];
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
         [self.navigationController setNavigationBarHidden:YES animated:YES];
+        self.toolBar.hidden = YES;
         
     }
 }
@@ -345,14 +374,13 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-     [self.playerView cancelAutoHidePlayerUI];
+    [self.playerView cancelAutoHidePlayerUI];
     [self.webView removeObserver:self forKeyPath:@"loading"];
      [self.webView removeObserver:self forKeyPath:@"title"];
      [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [self.webView setUIDelegate:nil];
     [self.webView.scrollView setDelegate:nil];
     [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"Vmovie"];
-    
     NSLog(@"%s",__func__);
 }
 

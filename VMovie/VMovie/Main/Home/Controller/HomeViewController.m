@@ -188,7 +188,6 @@
     viewController.view.x = index * scrollView.width;
     viewController.view.y = 0;
     viewController.view.height = scrollView.height - 64;
-    
     [self.contentView addSubview:viewController.view];
 }
 

@@ -69,6 +69,22 @@ typedef NS_ENUM(NSInteger,YZMoviePlayerState) {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor blackColor];
         self.state = YZPlayerStateStopped;
+        
+        [self addNotificationAndAction];
+        
+        // 监测设备方向
+        [self observingRotating];
+        [self deviceOrientationDidChange];
+        
+        // 计时器
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(playerTimerAction) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+        
+        // 添加手势
+        [self createTapGesture];
+        
+        //获取系统音量
+        [self configureVolume];
     }
     return self;
 }
@@ -78,11 +94,20 @@ typedef NS_ENUM(NSInteger,YZMoviePlayerState) {
     self.playerLayer.frame = self.bounds;
 }
 
+- (void)setTitle:(NSString *)title {
+    _title = [title copy];
+      self.playerUI.titleLabel.text = title;
+}
+
 - (void)setVideoUrl:(NSString *)videoUrl {
     
     _videoUrl = [videoUrl copy];
     
-    self.playerUI.titleLabel.text = self.title;
+    if (!videoUrl || videoUrl.length <= 0) {
+        return;
+    }
+    
+  
     
     self.repeatToPlay = NO;
     self.playDidEnd   = NO;
@@ -92,26 +117,10 @@ typedef NS_ENUM(NSInteger,YZMoviePlayerState) {
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     [self.layer insertSublayer:self.playerLayer atIndex:0];
 
-    [self addNotificationAndAction];
-    
-    // 监测设备方向
-    [self observingRotating];
-    [self deviceOrientationDidChange];
-    
     // 初始化显示PlayerUI为YES
     self.isUIShowing = YES;
-//    // 延迟隐藏PlayerUI
-//    [self autoHidePlayerUI];
-    
-    // 计时器
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(playerTimerAction) userInfo:nil repeats:YES];
-      [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    
-    // 添加手势
-    [self createTapGesture];
-    
-    //获取系统音量
-    [self configureVolume];
+    // 延迟隐藏PlayerUI
+    [self autoHidePlayerUI];
 }
 
 //获取系统音量
@@ -246,6 +255,7 @@ typedef NS_ENUM(NSInteger,YZMoviePlayerState) {
     
     // 关闭定时器
     [self.timer invalidate];
+    self.timer = nil;
     // 暂停
     [self pause];
     // 移除原来的layer
@@ -861,7 +871,7 @@ typedef NS_ENUM(NSInteger,YZMoviePlayerState) {
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.player removeObserver:self forKeyPath:@"rate"];
+    [_player removeObserver:self forKeyPath:@"rate"];
     NSLog(@"%s",__func__);
 }
 

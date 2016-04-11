@@ -65,6 +65,11 @@
 		71AC02C61CBA9FC600B15B3B /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AC02C51CBA9FC600B15B3B /* CommentCell.m */; };
 		71AC02C91CBAA50300B15B3B /* UIImageView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AC02C81CBAA50300B15B3B /* UIImageView+Extension.m */; };
 		71AC02CC1CBB28E000B15B3B /* CommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AC02CB1CBB28E000B15B3B /* CommentTableViewController.m */; };
+		71AC02DC1CBB632A00B15B3B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC02DB1CBB632A00B15B3B /* libsqlite3.0.tbd */; };
+		71AC02DE1CBB633800B15B3B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC02DD1CBB633800B15B3B /* libz.tbd */; };
+		71AC02E01CBB634300B15B3B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC02DF1CBB634300B15B3B /* libc++.tbd */; };
+		71AC02E21CBB634D00B15B3B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC02E11CBB634D00B15B3B /* CoreTelephony.framework */; };
+		71AC02E41CBB635600B15B3B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AC02E31CBB635600B15B3B /* SystemConfiguration.framework */; };
 		71AD780B1CAA147F00D983A0 /* YZNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD780A1CAA147F00D983A0 /* YZNetworking.m */; };
 		71AD780E1CAA338200D983A0 /* NSArray+Categoty.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD780D1CAA338200D983A0 /* NSArray+Categoty.m */; };
 		71AD78111CAA367B00D983A0 /* UITableView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AD78101CAA367B00D983A0 /* UITableView+Extension.m */; };
@@ -221,6 +226,11 @@
 		71AC02C81CBAA50300B15B3B /* UIImageView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Extension.m"; sourceTree = "<group>"; };
 		71AC02CA1CBB28E000B15B3B /* CommentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewController.h; sourceTree = "<group>"; };
 		71AC02CB1CBB28E000B15B3B /* CommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewController.m; sourceTree = "<group>"; };
+		71AC02DB1CBB632A00B15B3B /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		71AC02DD1CBB633800B15B3B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		71AC02DF1CBB634300B15B3B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		71AC02E11CBB634D00B15B3B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		71AC02E31CBB635600B15B3B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		71AD78091CAA147F00D983A0 /* YZNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZNetworking.h; sourceTree = "<group>"; };
 		71AD780A1CAA147F00D983A0 /* YZNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZNetworking.m; sourceTree = "<group>"; };
 		71AD780C1CAA338200D983A0 /* NSArray+Categoty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Categoty.h"; sourceTree = "<group>"; };
@@ -291,6 +301,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71AC02E41CBB635600B15B3B /* SystemConfiguration.framework in Frameworks */,
+				71AC02E21CBB634D00B15B3B /* CoreTelephony.framework in Frameworks */,
+				71AC02E01CBB634300B15B3B /* libc++.tbd in Frameworks */,
+				71AC02DE1CBB633800B15B3B /* libz.tbd in Frameworks */,
+				71AC02DC1CBB632A00B15B3B /* libsqlite3.0.tbd in Frameworks */,
 				9BECF1B83480CC97727A2CDD /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,6 +827,11 @@
 		DFC38E166A0BE0F157392D47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71AC02E31CBB635600B15B3B /* SystemConfiguration.framework */,
+				71AC02E11CBB634D00B15B3B /* CoreTelephony.framework */,
+				71AC02DF1CBB634300B15B3B /* libc++.tbd */,
+				71AC02DD1CBB633800B15B3B /* libz.tbd */,
+				71AC02DB1CBB632A00B15B3B /* libsqlite3.0.tbd */,
 				2661CB35C065D94720F20F4D /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -1205,6 +1225,10 @@
 				INFOPLIST_FILE = VMovie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VMovie/Expand/Tool/YZWeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.yz.VMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1220,6 +1244,10 @@
 				INFOPLIST_FILE = VMovie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VMovie/Expand/Tool/YZWeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.yz.VMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
