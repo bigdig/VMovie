@@ -40,7 +40,7 @@
 {
     if (self.childViewControllers.count > 0) { // 如果push进来的不是第一个控制器
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"返回" forState:UIControlStateNormal];
+//        [button setTitle:@"返回" forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"login_back_button"] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"login_back_button"] forState:UIControlStateHighlighted];
         button.size = CGSizeMake(70, 30);
@@ -65,23 +65,28 @@
     
 }
 
+
 - (void)back
 {
     [self popViewControllerAnimated:YES];
 }
 
-- (BOOL)shouldAutorotate
-{
-    return [self.topViewController shouldAutorotate];
+
+- (BOOL)shouldAutorotate{
+    return [self.visibleViewController shouldAutorotate];
+    
 }
 
--(UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return [self.topViewController supportedInterfaceOrientations];
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return [self.visibleViewController preferredInterfaceOrientationForPresentation];
 }
 
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationPortrait;
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    if (![self.visibleViewController isKindOfClass:[UIAlertController class]]) {//iOS9 UIWebRotatingAlertController
+        return [self.visibleViewController supportedInterfaceOrientations];
+    }else{
+        return UIInterfaceOrientationMaskPortrait;
+    }
 }
 
 

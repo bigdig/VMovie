@@ -27,7 +27,7 @@
     //调整titleView位置
     for (UINavigationItem *item in self.items) {
         
-        if (item.titleView != nil) {
+        if (item.titleView != nil && ![item.titleView isKindOfClass:[UIButton class]]) {
             item.titleView.y = self.height - item.titleView.height;
         }
     }

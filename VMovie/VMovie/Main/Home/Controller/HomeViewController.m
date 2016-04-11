@@ -41,8 +41,8 @@
     [self setupContentView];
     
     [YZTopWindow show];
-    
 }
+
 
 /** 添加子控制器*/
 - (void) addChildViewControllers {
@@ -217,5 +217,6 @@
 {
     return UIInterfaceOrientationPortrait;
 }
+
 
 @end

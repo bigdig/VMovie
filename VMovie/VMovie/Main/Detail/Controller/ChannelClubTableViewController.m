@@ -182,4 +182,5 @@ static NSString * const movieCellIdentifier = @"movieCellIdentifier";
     return UIInterfaceOrientationPortrait;
 }
 
+
 @end
