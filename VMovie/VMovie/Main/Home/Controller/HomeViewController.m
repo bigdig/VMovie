@@ -167,7 +167,7 @@
 }
 
 - (void) searchItemClick {
-    [SVProgressHUD dismiss];
+//    [SVProgressHUD dismiss];
     SearchMovieViewController *searchMovieVc = [[SearchMovieViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:searchMovieVc];
 

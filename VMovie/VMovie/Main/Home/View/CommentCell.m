@@ -37,7 +37,7 @@
         [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(15);
             make.top.equalTo(self.contentView).offset(10);
-            make.width.height.equalTo(@35);
+            make.width.height.equalTo(@(ScaleFrom_iPhone5_Desgin(30)));
         }];
         
         [self.usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,13 +52,13 @@
         
         [self.appreciatedButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.avatarView);
-            make.right.equalTo(self.contentView).offset(-30);
+            make.right.equalTo(self.contentView).offset(-ScaleFrom_iPhone5_Desgin(20));
         }];
         
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.usernameLabel);
             make.top.equalTo(self.avatarView.mas_bottom).offset(5);
-//            make.right.equalTo(self.appreciatedButton);
+//            make.right.equalTo(self.contentView).offset(-15);
         }];
         
     }
@@ -67,6 +67,7 @@
 
 - (CGFloat ) cellHeight:(Comment *)comment {
     self.comment = comment;
+    [self setNeedsLayout];
     [self layoutIfNeeded];
     return CGRectGetMaxY(self.contentLabel.frame) + 10;
 }
@@ -87,15 +88,17 @@
     if (comment.isSubComment) {
         self.contentLabel.text = [NSString stringWithFormat:@"回复 %@:%@",comment.reply_username,comment.content];
         [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(60);
+            make.left.equalTo(self).offset(ScaleFrom_iPhone5_Desgin(40));
             make.right.top.bottom.equalTo(self);
         }];
+        self.contentLabel.preferredMaxLayoutWidth = App_Frame_Width - 150;
     } else {
         self.contentLabel.text = comment.content;
         
         [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
+        self.contentLabel.preferredMaxLayoutWidth = App_Frame_Width - 80;
     }
 }
 
@@ -112,7 +115,7 @@
     if (!_usernameLabel) {
         _usernameLabel = [UILabel new];
         [_usernameLabel setTextColor:[UIColor blackColor]];
-        _usernameLabel.font = [UIFont systemFontOfSize:14.0f];
+        _usernameLabel.font = [UIFont systemFontOfSize:ScaleFrom_iPhone5_Desgin(13.0f)];
     }
     return _usernameLabel;
 }
@@ -121,7 +124,7 @@
     if (!_timeLabel) {
         _timeLabel = [UILabel new];
         [_timeLabel setTextColor:[UIColor grayColor]];
-        _timeLabel.font = [UIFont systemFontOfSize:12.0f];
+        _timeLabel.font = [UIFont systemFontOfSize:ScaleFrom_iPhone5_Desgin(11.0f)];
     }
     return _timeLabel;
 }
@@ -130,7 +133,7 @@
     if (!_appreciatedButton) {
         _appreciatedButton = [UIButton new];
         [_appreciatedButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        _appreciatedButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+        _appreciatedButton.titleLabel.font = [UIFont systemFontOfSize:ScaleFrom_iPhone5_Desgin(11.0f)];
         [_appreciatedButton setImage:[UIImage imageNamed:@"img_details_appreciated"] forState:UIControlStateNormal];
     }
     return _appreciatedButton;
@@ -140,9 +143,8 @@
     if (!_contentLabel) {
         _contentLabel = [UILabel new];
         _contentLabel.textColor = [UIColor blackColor];
-        _contentLabel.font = [UIFont systemFontOfSize:16.0f];
+        _contentLabel.font = [UIFont systemFontOfSize:ScaleFrom_iPhone5_Desgin(14.0f)];
         _contentLabel.numberOfLines = 0;
-        _contentLabel.preferredMaxLayoutWidth = self.contentView.width - 95;
     }
     return _contentLabel;
 }
